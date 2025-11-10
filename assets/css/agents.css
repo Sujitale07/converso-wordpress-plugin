@@ -1,0 +1,25 @@
+#agents-repeater {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+#agents-repeater th,
+#agents-repeater td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+#agents-repeater th {
+    background-color: #f7f7f7;
+}
+
+#agents-repeater tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#agents-repeater input.regular-text {
+    width: 100%;
+    box-sizing: border-box;
+}

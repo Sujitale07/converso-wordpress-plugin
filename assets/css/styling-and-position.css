@@ -1,0 +1,48 @@
+.bg-red-600 {
+  background: #08ca80;
+}
+
+.bg-blue {
+  background-color: blue;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, auto);
+  gap: 15px;
+}
+
+.button-position-grid {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.button-position-grid > div {
+  display: flex;
+  align-items: center;
+}
+
+.button-grid .button-demo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #dadada;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+/* Green glass effect */
+.button-demo.active {
+  background: rgba(37, 211, 102, 0.2); /* semi-transparent green */
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(37, 211, 102, 0.5);
+}
