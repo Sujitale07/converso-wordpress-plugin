@@ -5,6 +5,7 @@ namespace Converso\Frontend\Buttons;
 class BtnOne {
 
     public function render() {
+        ob_start();
         ?>
         <style>
             .wa-icon {
@@ -38,5 +39,6 @@ class BtnOne {
             </svg>
         </div>                
         <?php
+        return ob_get_clean();
     }
 }
