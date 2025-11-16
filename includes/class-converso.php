@@ -17,12 +17,12 @@ final class Converso{
         $this->init_hooks();
     }
 
-    private function init_hooks() {
+    protected function init_hooks() {
         // Example:
+        new Frontend();
+
         if ( is_admin() ) {
-            new Admin();
-        } else {
-            new Frontend();
+            new Admin();    
         }
     }
 
