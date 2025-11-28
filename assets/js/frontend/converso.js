@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const agent = data.data;
                 console.log("Selected Agent:", agent);
 
-                // Example: Open WhatsApp link in new tab
                 if (agent.wa_link) {
                     window.open(agent.wa_link, "_blank");
                 }

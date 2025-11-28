@@ -2,6 +2,7 @@
 
 namespace Converso\Frontend;
 
+use Converso\Core\Log\Log;
 use Converso\Frontend\Buttons\BtnOne;
 use Converso\Frontend\Buttons\BtnTwo;
 use Converso\Frontend\Buttons\BtnThree;
@@ -36,8 +37,8 @@ class Frontend{
     
     public function __construct(){
 
-        $is_active = get_option("converso_enable_whatsapp", true);
-
+        $is_active = get_option("converso_enable_whatsapp", false);
+        
         if(!$is_active){
             return;
         }
@@ -97,10 +98,16 @@ class Frontend{
         // Get all agents
         $get_agent = get_option("converso_agents_data", []);
 
-        // Filter agent by city or get default
-        $current_agent = Helper::filter_agent($get_agent, $user_location['city']);
+        // Log::info($get_agent);
 
-        // Decode dynamic fields in greetings
+        $current_agent = Helper::filter_agent(
+            $get_agent, 
+            [
+                "city"=>$user_location['city'], 
+                "state"=>$user_location['state'], 
+                "country"=>$user_location['country']
+            ]);
+
         $decoded_agent_data = Helper::decode_dynamic_fields($current_agent);
 
         // Generate WhatsApp link

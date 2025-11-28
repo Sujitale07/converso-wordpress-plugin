@@ -11,7 +11,6 @@ class Admin {
     private $modules = [];
 
     public function __construct() {
-        // Instantiate all modules here
         $this->modules['general'] = new General();
         $this->modules['agents']  = new Agents();
         $this->modules['dynamic-fields']  = new DynamicFields();

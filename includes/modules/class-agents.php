@@ -9,12 +9,10 @@ class Agents {
     }
 
     public function enqueue_assets($hook) {
-        // Only load on your plugin page
         if ($hook !== 'toplevel_page_converso') return;
 
-        wp_enqueue_media(); // Required for Media Uploader
+        wp_enqueue_media(); 
 
-        // JS for repeater and media
         wp_enqueue_script(
             'converso-agents-js',
             CONVERSO_PLUGIN_URL . "/assets/js/agents.js",
@@ -112,9 +110,14 @@ class Agents {
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td style="border:1px solid #ccc; padding:5px;">
-                                                    <input type="text" name="converso_agents_data[<?php echo $index; ?>][location]" value="<?php echo esc_attr($agent['location']); ?>" class="regular-text">
+                                                <td class="converso_location_parent">
+                                                    <input type="text" 
+                                                            name="converso_agents_data[<?php echo $index; ?>][location]" 
+                                                            value="<?php echo esc_attr($agent['location']); ?>" 
+                                                            class="converso_location" 
+                                                            placeholder="Select location">                                                   
                                                 </td>
+
                                                 <td style="border:1px solid #ccc; padding:5px;">
                                                     <textarea name="converso_agents_data[<?php echo $index; ?>][greetings]" class="regular-text" rows="5"  id=""><?php echo esc_attr($agent['greetings']); ?></textarea>
                                                 </td>

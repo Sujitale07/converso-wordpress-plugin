@@ -2,6 +2,8 @@
 
 namespace Converso\Helpers;
 
+use Converso\Core\Log\Log;
+
 class Helper {
 
     public static function get_client_location($lat, $lon) {
@@ -62,29 +64,56 @@ class Helper {
         ];
     }
 
-    public static function filter_agent(array $agents, string $city) {
-        $city = strtolower(trim($city));
+    public static function filter_agent(array $agents, array $locationParts)
+    {
+        $city    = strtolower(trim($locationParts['city'] ?? ''));
+        $state   = strtolower(trim($locationParts['state'] ?? ''));
+        $country = strtolower(trim($locationParts['country'] ?? ''));
 
-        // Try to find a matching agent
-        foreach ($agents as $agent) {
-            if (isset($agent['location']) && stripos($agent['location'], $city) !== false) {
-                return $agent; // Return the first matching agent
-            }
+        // Normalize agent locations
+        foreach ($agents as &$agent) {
+            $agent['location_lower'] = strtolower($agent['location'] ?? '');
         }
 
-        // If no match, return the default agent
+        // STEP 1 — Match CITY
+        $cityMatches = array_filter($agents, function ($agent) use ($city) {
+            return stripos($agent['location_lower'], $city) !== false;
+        });
+
+        if (count($cityMatches) === 1) {
+            return array_values($cityMatches)[0];
+        }
+
+        // STEP 2 — Match STATE within city matches
+        $stateMatches = array_filter($cityMatches, function ($agent) use ($state) {
+            return stripos($agent['location_lower'], $state) !== false;
+        });
+
+        if (count($stateMatches) === 1) {
+            return array_values($stateMatches)[0];
+        }
+
+        // STEP 3 — Match COUNTRY within state matches
+        $countryMatches = array_filter($stateMatches ?: $cityMatches, function ($agent) use ($country) {
+            return stripos($agent['location_lower'], $country) !== false;
+        });
+
+        if (count($countryMatches) === 1) {
+            return array_values($countryMatches)[0];
+        }
+
+        // FALLBACK — Default agent
         foreach ($agents as $agent) {
-            if (isset($agent['default']) && $agent['default'] === true) {
+            if (!empty($agent['default'])) {
                 return $agent;
             }
         }
 
-        // Fallback: return null if no default agent found
         return null;
     }
 
+
     public static function decode_dynamic_fields(array $agent) {
-        // Get dynamic fields from options
         $dynamic_fields = get_option("converso_dynamic_fields_data", []);
 
         // Get agent greetings
