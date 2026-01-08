@@ -2,6 +2,7 @@
 
 namespace Converso\Frontend;
 
+use Converso\Core\Log\Log;
 use Converso\Frontend\Buttons\BtnOne;
 use Converso\Frontend\Buttons\BtnTwo;
 use Converso\Frontend\Buttons\BtnThree;
@@ -35,9 +36,18 @@ class Frontend{
 
     
     public function __construct(){
+
+        $is_active = get_option("converso_enable_whatsapp", false);
+        
+        if(!$is_active){
+            return;
+        }
         
         add_action('wp_footer', [$this, 'footer_scripts']);
-        add_action('enqueue_scripts',[$this, 'enqueue_scripts']);
+        add_action('wp_enqueue_scripts',[$this, 'enqueue_scripts']);
+
+        add_action('wp_ajax_converso_reverse_geo', [$this,'converso_reverse_geo']);
+        add_action('wp_ajax_nopriv_converso_reverse_geo', [$this, 'converso_reverse_geo']);
 
         
         self::$converso_wp_buttons = array(
@@ -74,16 +84,68 @@ class Frontend{
     public function footer_scripts() {
         echo self::render_converso_wp_button();
     }
+    function converso_reverse_geo() {
+        $lat = sanitize_text_field($_POST['lat']);
+        $lon = sanitize_text_field($_POST['lon']);
 
-    public function enqueue_scripts(){
-        wp_enqueue_script('converso-ip-scripts', CONVERSO_PLUGIN_URL . "/assets/js/frontend/converso.js", array('jquery'), '1.0', true);
+        if (!$lat || !$lon) {
+            wp_send_json_error("Missing lat/lon");
+        }
+
+        $user_location = Helper::get_client_location($lat, $lon);
+
+        $get_agent = get_option("converso_agents_data", []);
+
+
+        $current_agent = Helper::filter_agent(
+            $get_agent, 
+            [
+                "city"=>$user_location['city'], 
+                "state"=>$user_location['state'], 
+                "country"=>$user_location['country']
+            ]);
+
+        $decoded_agent_data = Helper::decode_dynamic_fields($current_agent);
+
+        $phone = preg_replace('/\D+/', '', $decoded_agent_data['phone']); // remove any non-digits
+        $message = urlencode($decoded_agent_data['greetings']); // encode message for URL
+        $wa_link = "https://wa.me/{$phone}?text={$message}";
+
+        $decoded_agent_data['wa_link'] = $wa_link;
+
+        wp_send_json_success($decoded_agent_data);
+        wp_die();
     }
+
+
+
+    public function enqueue_scripts() {
+
+        wp_register_script(
+            'converso-ip-scripts',
+            CONVERSO_PLUGIN_URL . "assets/js/frontend/converso.js",
+            [],
+            1,
+            true
+        );
+
+        wp_localize_script(
+            "converso-ip-scripts",
+            "converso_ajax",
+            [
+                "ajax_url" => admin_url("admin-ajax.php")
+            ]
+        );
+
+        wp_enqueue_script('converso-ip-scripts');
+    }
+
 
     public static function render_converso_wp_button(){
         $button_position = self::get_button_position();
         $current_button = self::get_current_button();
 
-        $renderable_button = self::$converso_wp_positions["$button_position"]->render($current_button->render());
+        $renderable_button = self::$converso_wp_positions["$button_position"]->render($current_button->render(), "#");
 
         return $renderable_button;
     }

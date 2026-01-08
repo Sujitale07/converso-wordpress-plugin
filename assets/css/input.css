@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css");
+@import "tailwindcss";
+@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-primary: "IBM Plex Sans", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+  --font-accent: "DM Serif Text", serif;
+
+  --color-primary: #005aff;
+
+  --color-grey-1: #212121;
+  --color-grey-2: #454545;
+  --color-grey-3: #595959;
+  --color-grey-4: #8b8b8b;
+  --color-grey-5: #b2b2b2;
+  --color-grey-6: #e0e0e0;
+  --color-grey-7: #f2f2f2;
+  --color-grey-8: #fafafa;
+  --color-grey-9: #f9fafd;
+  --color-grey-10: #fcfcfc;
+  --color-grey-11: #f9f9f9;
+
+  /* Blue / background */
+  --color-blue-bg: #f3f8ff;
+
+  /* Dark mode */
+  --color-dark-1: #121212;
+  --color-dark-2: #2d2d2d;
+  --color-dark-bg2: #1a1a1a;
+}

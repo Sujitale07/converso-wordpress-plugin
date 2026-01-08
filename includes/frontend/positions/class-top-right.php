@@ -5,7 +5,8 @@ namespace Converso\Frontend\Positions;
 
 class TopRight{
 
-    public function render($children){
+    public function render($children, $href = "#", $tab = false){
+        ob_start();
         ?>
         <style>
             .converso-top-right{
@@ -15,9 +16,12 @@ class TopRight{
             }
         </style>
 
-        <div class="converso-top-right">
-            <?php echo $children ?>
+        <div id="converso-wp-button"  class="converso-top-right">
+            <a href="<?php echo $href ?>" <?php  echo $tab ?  "target='_blank'" :  "" ?> >
+                <?php echo $children ?>
+            </a>
         </div>
         <?php
+        return ob_get_clean();
     }    
 }

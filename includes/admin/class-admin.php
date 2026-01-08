@@ -11,13 +11,13 @@ class Admin {
     private $modules = [];
 
     public function __construct() {
-        // Instantiate all modules here
         $this->modules['general'] = new General();
         $this->modules['agents']  = new Agents();
         $this->modules['dynamic-fields']  = new DynamicFields();
         $this->modules['styling-and-positioning']  = new StylingAndPosition();
 
         add_action('admin_menu', [$this, 'register_admin_pages']);
+        add_action("admin_enqueue_scripts", [$this, "enqueue_global_scripts"]);
     }
 
     public function register_admin_pages() {
@@ -36,14 +36,14 @@ class Admin {
         $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
 
         echo '<div class="wrap">';
-        echo '<h1 style="margin-bottom: 10px;">Converso Settings</h1>';
-        echo '<h2 class="nav-tab-wrapper">';
+        echo '<h1 class="font-primary !mb-8 !font-bold">Converso - Whatsapp Lead Collection</h1>';
+        echo '<div class="mt-10">';
             $this->render_tab_link('general', 'General', $active_tab);
             $this->render_tab_link('agents', 'Agents', $active_tab);
             $this->render_tab_link('dynamic-fields', 'Dynamic Fields', $active_tab);        
             $this->render_tab_link('styling-and-positioning', 'Styling & Position', $active_tab);
             $this->render_tab_link('settings', 'Settings', $active_tab);
-        echo '</h2>';
+        echo '</div>';
 
         switch ($active_tab) {
             case 'agents':
@@ -84,7 +84,17 @@ class Admin {
     }
 
     private function render_tab_link($slug, $label, $active_tab) {
-        $active = ($active_tab === $slug) ? ' nav-tab-active' : '';
-        echo '<a href="?page=converso&tab=' . esc_attr($slug) . '" class="nav-tab' . $active . '">' . esc_html($label) . '</a>';
+        $is_active = ($active_tab === $slug);
+
+        $bg_class = $is_active ? 'bg-primary !text-grey-7' : 'bg-grey-6 !text-black';
+
+        echo '<a href="?page=converso&tab=' . esc_attr($slug) . '" 
+                class="text-sm px-5 py-2 ' . $bg_class . ' mr-2 rounded  font-primary">
+                ' . esc_html($label) . '
+            </a>';
+    }
+
+    public static function enqueue_global_scripts(){
+        wp_enqueue_style("converso-global-css",CONVERSO_PLUGIN_URL . "assets/css/tailwind.css", [], 1, false);
     }
 }

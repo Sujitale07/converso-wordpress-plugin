@@ -1,0 +1,551 @@
+
+/* CSS Variables - Shadcn Color System */
+:root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 6px;
+}
+
+/* ========================================
+   Global Resets & Base Styles
+   ======================================== */
+.converso-admin-wrap {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: hsl(var(--foreground));
+    line-height: 1.5;
+}
+
+.converso-admin-wrap * {
+    box-sizing: border-box;
+}
+
+.converso-admin-wrap .wp-heading-inline {
+    font-size: 32px;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+/* Add subtle description under title */
+.converso-admin-wrap .wp-heading-inline + p {
+    color: hsl(var(--muted-foreground));
+    font-size: 14px;
+    margin: 0 0 24px 0;
+}
+
+/* ========================================
+   Tab Navigation - Clean Shadcn Style
+   ======================================== */
+.nav-tab-wrapper {
+    border-bottom: 1px solid hsl(var(--border));
+    margin: 0 0 32px 0;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    gap: 0;
+}
+
+.nav-tab {
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    background: transparent !important;
+    color: hsl(var(--muted-foreground)) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    padding: 10px 16px !important;
+    margin: 0 !important;
+    transition: all 0.15s ease !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: relative;
+    top: 1px;
+}
+
+.nav-tab:hover {
+    background: hsl(var(--accent)) !important;
+    color: hsl(var(--foreground)) !important;
+}
+
+.nav-tab-active,
+.nav-tab-active:hover {
+    border-bottom-color: hsl(var(--primary)) !important;
+    color: hsl(var(--foreground)) !important;
+    background: transparent !important;
+}
+
+/* ========================================
+   Card Component - True Shadcn Style
+   ======================================== */
+.converso-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    padding: 0;
+    margin-bottom: 24px;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.converso-card-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: hsl(var(--card-foreground));
+    padding: 20px 24px;
+    margin: 0;
+    border-bottom: 1px solid hsl(var(--border));
+    letter-spacing: -0.01em;
+    background: hsl(var(--muted) / 0.3);
+}
+
+/* ========================================
+   Form Tables - Shadcn Clean Style
+   ======================================== */
+.converso-card .form-table {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+}
+
+.converso-card .form-table th {
+    width: 220px;
+    padding: 20px 24px 20px 24px;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+    font-size: 14px;
+    vertical-align: top;
+    text-align: left;
+    background: transparent;
+}
+
+.converso-card .form-table td {
+    padding: 20px 24px 20px 0;
+}
+
+.converso-card .form-table tr {
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.converso-card .form-table tr:last-child {
+    border-bottom: none;
+}
+
+/* ========================================
+   Input Fields - Shadcn Style
+   ======================================== */
+.form-table input[type="text"],
+.form-table input[type="number"],
+.form-table input[type="email"],
+.form-table input[type="url"],
+.form-table select,
+.form-table textarea,
+input[type="text"].regular-text,
+input[type="number"].regular-text,
+select.regular-text,
+textarea.regular-text {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px 12px !important;
+    border: 1px solid hsl(var(--input)) !important;
+    border-radius: calc(var(--radius) - 2px) !important;
+    font-size: 14px !important;
+    color: hsl(var(--foreground)) !important;
+    background: hsl(var(--background)) !important;
+    transition: all 0.15s ease !important;
+    box-shadow: none !important;
+    height: 40px !important;
+    line-height: normal !important;
+}
+
+.form-table textarea,
+textarea.regular-text {
+    height: auto !important;
+    min-height: 80px !important;
+    resize: vertical;
+    padding: 12px !important;
+}
+
+.form-table input[type="text"]:focus,
+.form-table input[type="number"]:focus,
+.form-table input[type="email"]:focus,
+.form-table input[type="url"]:focus,
+.form-table select:focus,
+.form-table textarea:focus,
+input[type="text"].regular-text:focus,
+input[type="number"].regular-text:focus,
+select.regular-text:focus,
+textarea.regular-text:focus {
+    border-color: hsl(var(--ring)) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1) !important;
+}
+
+.form-table .description {
+    color: hsl(var(--muted-foreground));
+    font-size: 13px;
+    margin-top: 6px;
+    font-style: normal;
+    line-height: 1.4;
+}
+
+/* ========================================
+   Buttons - Shadcn Style
+   ======================================== */
+.button-primary,
+input[type="submit"].button-primary {
+    background: hsl(var(--primary)) !important;
+    border: 1px solid hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    padding: 0 16px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    height: 40px !important;
+    line-height: 38px !important;
+    border-radius: calc(var(--radius) - 2px) !important;
+    transition: all 0.15s ease !important;
+    cursor: pointer !important;
+}
+
+.button-primary:hover,
+.button-primary:focus,
+input[type="submit"].button-primary:hover {
+    background: hsl(var(--primary) / 0.9) !important;
+    border-color: hsl(var(--primary) / 0.9) !important;
+    box-shadow: none !important;
+    color: hsl(var(--primary-foreground)) !important;
+}
+
+.button-secondary,
+.button {
+    color: hsl(var(--secondary-foreground)) !important;
+    border: 1px solid hsl(var(--input)) !important;
+    background: hsl(var(--background)) !important;
+    box-shadow: none !important;
+    padding: 0 16px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    height: 40px !important;
+    line-height: 38px !important;
+    border-radius: calc(var(--radius) - 2px) !important;
+    transition: all 0.15s ease !important;
+    text-shadow: none !important;
+}
+
+.button-secondary:hover,
+.button:hover {
+    background: hsl(var(--accent)) !important;
+    color: hsl(var(--accent-foreground)) !important;
+    border-color: hsl(var(--input)) !important;
+}
+
+/* ========================================
+   Data Tables - Shadcn Style
+   ======================================== */
+#agents-repeater,
+#dynamic-fields-repeater {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    border: none;
+    margin: 0;
+}
+
+#agents-repeater thead,
+#dynamic-fields-repeater thead {
+    background: hsl(var(--muted) / 0.5);
+}
+
+#agents-repeater th,
+#dynamic-fields-repeater th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    color: hsl(var(--muted-foreground));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+#agents-repeater td,
+#dynamic-fields-repeater td {
+    padding: 16px;
+    border: none;
+    border-bottom: 1px solid hsl(var(--border));
+    vertical-align: middle;
+}
+
+#agents-repeater tbody tr:last-child td,
+#dynamic-fields-repeater tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#agents-repeater tbody tr:hover,
+#dynamic-fields-repeater tbody tr:hover {
+    background: hsl(var(--muted) / 0.3);
+}
+
+/* ========================================
+   Checkbox & Radio - Shadcn Style
+   ======================================== */
+input[type="checkbox"],
+input[type="radio"] {
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer;
+    accent-color: hsl(var(--primary));
+    border: 1px solid hsl(var(--input)) !important;
+    border-radius: 3px;
+}
+
+/* ========================================
+   Settings Notices - Shadcn Style
+   ======================================== */
+.settings-error,
+.notice,
+.updated {
+    border-left-width: 0 !important;
+    border: 1px solid hsl(var(--border)) !important;
+    border-radius: calc(var(--radius) - 2px) !important;
+    box-shadow: none !important;
+    padding: 12px 16px !important;
+    margin: 16px 0 !important;
+    background: hsl(var(--background)) !important;
+}
+
+.notice-success,
+.updated {
+    background: hsl(142 76% 96%) !important;
+    border-color: hsl(142 71% 45%) !important;
+    color: hsl(142 71% 25%) !important;
+}
+
+.notice-error {
+    background: hsl(0 84% 96%) !important;
+    border-color: hsl(var(--destructive)) !important;
+    color: hsl(0 84% 40%) !important;
+}
+
+.notice-warning {
+    background: hsl(48 96% 96%) !important;
+    border-color: hsl(48 96% 53%) !important;
+    color: hsl(48 96% 33%) !important;
+}
+
+/* ========================================
+   Action Buttons in Tables
+   ======================================== */
+.remove-agent,
+.remove-dynamic-fields {
+    background: hsl(var(--background)) !important;
+    color: hsl(var(--destructive)) !important;
+    border: 1px solid hsl(var(--input)) !important;
+    padding: 0 12px !important;
+    font-size: 13px !important;
+    height: 36px !important;
+    line-height: 34px !important;
+    border-radius: calc(var(--radius) - 2px) !important;
+    transition: all 0.15s ease !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+}
+
+.remove-agent:hover,
+.remove-dynamic-fields:hover {
+    background: hsl(var(--destructive)) !important;
+    color: hsl(var(--destructive-foreground)) !important;
+    border-color: hsl(var(--destructive)) !important;
+}
+
+#add-agent,
+#add-dynamic-fields {
+    margin-top: 16px !important;
+    background: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+    border: 1px solid hsl(var(--primary)) !important;
+    padding: 0 16px !important;
+    height: 40px !important;
+    line-height: 38px !important;
+    border-radius: calc(var(--radius) - 2px) !important;
+    font-weight: 500 !important;
+    transition: all 0.15s ease !important;
+    text-shadow: none !important;
+}
+
+#add-agent:hover,
+#add-dynamic-fields:hover {
+    background: hsl(var(--primary) / 0.9) !important;
+}
+
+/* ========================================
+   Image Upload Preview
+   ======================================== */
+.agent-photo-preview {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: calc(var(--radius) - 2px);
+    border: 1px solid hsl(var(--border));
+    object-fit: cover;
+}
+
+.select-photo {
+    margin-top: 8px !important;
+    font-size: 13px !important;
+    height: 36px !important;
+    line-height: 34px !important;
+}
+
+/* ========================================
+   Button Grid (Styling & Position)
+   ======================================== */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 24px;
+}
+
+.button-grid .button-demo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid hsl(var(--border));
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    padding: 16px;
+    background: hsl(var(--background));
+}
+
+.button-demo:hover {
+    border-color: hsl(var(--ring));
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+}
+
+.button-demo.active {
+    background: hsl(var(--accent));
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+}
+
+.button-position-grid {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 24px;
+    flex-wrap: wrap;
+}
+
+.button-position-grid > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-position-grid label {
+    font-size: 14px;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+    cursor: pointer;
+}
+
+/* ========================================
+   Location Picker Modal
+   ======================================== */
+.converso_single_select_modal {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: hsl(var(--popover));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    z-index: 100;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.converso_single_select_modal input {
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid hsl(var(--border));
+    font-size: 14px;
+    outline: none;
+    background: hsl(var(--background));
+}
+
+.converso_list {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.converso_list li {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: calc(var(--radius) - 4px);
+    font-size: 14px;
+    transition: all 0.15s ease;
+}
+
+.converso_list li:hover {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media screen and (max-width: 782px) {
+    .converso-card .form-table th {
+        width: 100%;
+        display: block;
+        padding-bottom: 8px;
+    }
+    
+    .converso-card .form-table td {
+        display: block;
+        padding-top: 8px;
+        padding-left: 24px;
+    }
+    
+    .form-table input[type="text"],
+    .form-table input[type="number"],
+    .form-table select {
+        max-width: 100%;
+    }
+    
+    .button-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}

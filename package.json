@@ -1,0 +1,20 @@
+{
+  "name": "converso",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:tailwind": "npx @tailwindcss/cli -i ./assets/css/input.css -o ./assets/css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@personal-github:Sujitale07/converso-wordpress-plugin.git"
+  },
+  "author": "Sujit Ale Magar",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.14",
+    "tailwindcss": "^4.1.14"
+  }
+}

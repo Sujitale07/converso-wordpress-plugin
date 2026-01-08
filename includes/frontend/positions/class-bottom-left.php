@@ -5,7 +5,8 @@ namespace Converso\Frontend\Positions;
 
 class BottomLeft{
 
-    public function render($children){
+    public function render($children, $link = "#", $tab = false){
+        ob_start();
         ?>
         <style>
             .converso-bottom-left{
@@ -15,9 +16,12 @@ class BottomLeft{
             }
         </style>
 
-        <div class="converso-bottom-left">
-            <?php echo $children ?>
+        <div id="converso-wp-button" class="converso-bottom-left">
+            <a href="<?php echo $link ?>" <?php  echo $tab ? "target='_blank'" : '' ?>>
+                <?php echo $children ?>
+            </a>
         </div>
         <?php
+        return ob_get_clean();
     }    
 }
