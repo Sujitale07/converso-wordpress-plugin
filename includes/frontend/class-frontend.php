@@ -92,13 +92,10 @@ class Frontend{
             wp_send_json_error("Missing lat/lon");
         }
 
-        // Get user location
         $user_location = Helper::get_client_location($lat, $lon);
 
-        // Get all agents
         $get_agent = get_option("converso_agents_data", []);
 
-        // Log::info($get_agent);
 
         $current_agent = Helper::filter_agent(
             $get_agent, 
@@ -110,12 +107,10 @@ class Frontend{
 
         $decoded_agent_data = Helper::decode_dynamic_fields($current_agent);
 
-        // Generate WhatsApp link
         $phone = preg_replace('/\D+/', '', $decoded_agent_data['phone']); // remove any non-digits
         $message = urlencode($decoded_agent_data['greetings']); // encode message for URL
         $wa_link = "https://wa.me/{$phone}?text={$message}";
 
-        // Add WhatsApp link to agent data
         $decoded_agent_data['wa_link'] = $wa_link;
 
         wp_send_json_success($decoded_agent_data);

@@ -75,34 +75,43 @@ class Helper {
             $agent['location_lower'] = strtolower($agent['location'] ?? '');
         }
 
-        // STEP 1 — Match CITY
-        $cityMatches = array_filter($agents, function ($agent) use ($city) {
-            return stripos($agent['location_lower'], $city) !== false;
+        $onlineAgents = array_filter($agents, function ($agent) {
+            return !empty(!$agent['converso_agents_is_offline']);
+        });
+
+        $cityMatches = array_filter($onlineAgents, function ($agent) use ($city) {
+            return $city && stripos($agent['location_lower'], $city) !== false;
         });
 
         if (count($cityMatches) === 1) {
             return array_values($cityMatches)[0];
         }
 
-        // STEP 2 — Match STATE within city matches
         $stateMatches = array_filter($cityMatches, function ($agent) use ($state) {
-            return stripos($agent['location_lower'], $state) !== false;
+            return $state && stripos($agent['location_lower'], $state) !== false;
         });
 
         if (count($stateMatches) === 1) {
             return array_values($stateMatches)[0];
         }
 
-        // STEP 3 — Match COUNTRY within state matches
-        $countryMatches = array_filter($stateMatches ?: $cityMatches, function ($agent) use ($country) {
-            return stripos($agent['location_lower'], $country) !== false;
-        });
+        $countryMatches = array_filter(
+            $stateMatches ?: $cityMatches,
+            function ($agent) use ($country) {
+                return $country && stripos($agent['location_lower'], $country) !== false;
+            }
+        );
 
         if (count($countryMatches) === 1) {
             return array_values($countryMatches)[0];
         }
 
-        // FALLBACK — Default agent
+        foreach ($agents as $agent) {
+            if (!empty($agent['default']) && !empty($agent['is_online'])) {
+                return $agent;
+            }
+        }
+
         foreach ($agents as $agent) {
             if (!empty($agent['default'])) {
                 return $agent;
@@ -111,6 +120,7 @@ class Helper {
 
         return null;
     }
+
 
 
     public static function decode_dynamic_fields(array $agent) {
