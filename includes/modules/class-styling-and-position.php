@@ -28,7 +28,12 @@ class StylingAndPosition{
         add_action("admin_init", [$this, "register_settings"]);
     }
 
-    public function enqueue_assets(){
+    public function enqueue_assets($hook){
+        if ($hook !== 'toplevel_page_converso') return;
+
+        $tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
+        if ($tab !== 'styling-and-positioning') return;
+
         wp_enqueue_style("converso-styling-and-position", CONVERSO_PLUGIN_URL . "assets/css/styling-and-position.css",[] , '1.0', false);
         wp_enqueue_script("converso-styling-and-position", CONVERSO_PLUGIN_URL . "assets/js/styling-and-position.js", ['jquery'], '1.0', true);
     }

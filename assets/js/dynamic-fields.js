@@ -1,100 +1,171 @@
-jQuery(document).ready(function ($) {
+document.addEventListener("DOMContentLoaded", function () {
+    const list = document.getElementById("converso-fields-table");
+    const searchInput = document.getElementById('field-search');
+    const sortSelect = document.getElementById('field-sort');
+    const applyFilterBtn = document.getElementById('apply-filter');
 
-    // Handle pre-submit validation
-    $('form').on('submit', function (e) {
-        let isValid = true;
-        let callables = [];
+    // Add Field Modal
+    const addFieldModal = document.getElementById("addFieldModal");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const addFieldBtn = document.getElementById("add-field");
+    const closeFieldModalBtn = document.querySelector("#addFieldModal button");
 
-        // Remove any old warnings
-        $('.converso-warning').remove();
-
-        // Loop through each row
-        $('#dynamic-fields-repeater tbody tr').each(function () {
-            let $row = $(this);
-            let name = $row.find('input[name*="[name]"]').val().trim();
-            let value = $row.find('input[name*="[value]"]').val().trim();
-            let callable = $row.find('input[name*="[callable]"]').val().trim();
-
-            // Skip empty rows
-            if (!name && !value) return;
-
-            // If name exists but value is empty
-            if (name && !value) {
-                showWarning(`Value cannot be empty for field "<strong>${name}</strong>".`);
-                $row.css('background', '#ffe5e5ff');
-                isValid = false;
-                return false; // stop loop
-            }
-
-            // Check duplicate callable
-            if (callables.includes(callable)) {
-                showWarning(`Duplicate callable <code>${callable}</code> found. Each callable must be unique.`);
-                $row.css('background', '#fff8e5');
-                isValid = false;
-                return false; // stop loop
-            }
-
-            callables.push(callable);
-            $row.css('background', ''); 
+    if (addFieldBtn) {
+        addFieldBtn.addEventListener("click", () => {
+            modalBackdrop.classList.remove("opacity-0", "pointer-events-none");
+            addFieldModal.classList.remove("opacity-0", "scale-90");
         });
-
-        if (!isValid) {
-            e.preventDefault();
-        }
-    });
-
-    function showWarning(message) {
-        let $notice = $(`
-            <div class="notice notice-warning is-dismissible converso-warning">
-                <p>${message}</p>
-            </div>
-        `);
-        $('.toast-placeholder').prepend($notice);
-        setTimeout(() => {
-            $notice.fadeOut(400, function () {
-                $(this).remove();
-            });
-        }, 5000);
     }
 
-    // ====== ADD/REMOVE ROWS ======
-    let index = $('#dynamic-fields-repeater tbody tr').length;
+    if (closeFieldModalBtn) {
+        closeFieldModalBtn.addEventListener("click", () => {
+            closeModal();
+        });
+    }
 
-    // Add new row
-    $('#add-dynamic-fields').on('click', function () {
-        let row = `<tr>
-            <td style="border:1px solid #ccc; padding:5px;">${index + 1}</td>
-            <td style="border:1px solid #ccc; padding:5px;"><input type="text"  name="converso_dynamic_fields_data[${index}][name]" class="regular-text dynamic_fields_name"></td>
-            <td style="border:1px solid #ccc; padding:5px;"><input type="text" name="converso_dynamic_fields_data[${index}][value]" class="regular-text"></td>
-            <td style="border:1px solid #ccc; padding:5px;"><input type="text" name="converso_dynamic_fields_data[${index}][callable]" readonly class="regular-text dynamic_fields_callable"></td>
-            <td style="border:1px solid #ccc; padding:5px;">
-                <button type="button" class="button remove-dynamic-fields">Remove</button>
-            </td>
-        </tr>`;
-        $('#dynamic-fields-repeater tbody').append(row);
-        index++;
-    });
+    // Close on backdrop click
+    if (modalBackdrop) {
+        modalBackdrop.addEventListener("click", (e) => {
+            if (e.target === modalBackdrop) {
+                closeModal();
+                closeEditModal();
+                closeDeleteModal();
+            }
+        });
+    }
 
-    // Remove row
-    $(document).on('click', '.remove-dynamic-fields', function () {
-        $(this).closest('tr').remove();
-    });
+    function closeModal() {
+        modalBackdrop.classList.add("opacity-0", "pointer-events-none");
+        addFieldModal.classList.add("opacity-0", "scale-90");
+        document.getElementById("fieldForm").reset();
+    }
 
-    // Update callable on input
-    $(document).on('input', '.dynamic_fields_name', function () {
-        let value = $(this).val().trim();
-        let callableValue = `{${value}}`;
-        let $currentRow = $(this).closest('tr');
-        let $callableField = $currentRow.find('.dynamic_fields_callable');
+    // Edit Field Modal
+    const editFieldModal = document.getElementById("edit-field-modal");
+    const editBackdrop = document.getElementById("edit-field-modal-backdrop");
+    const closeEditModalBtn = document.querySelector(".close-edit-modal");
 
-        $('.converso-warning').remove();
+    // Event Delegation for Edit Buttons
+    // Event Delegation for Edit Buttons
+    // Removed duplicate listener block as it is now handled at the end of the file.
 
-        let existingCallables = $('.dynamic_fields_callable')
-            .not($callableField)
-            .map(function () { return $(this).val(); })
-            .get();
 
-        $callableField.val(callableValue);
-    });
+    function openEditModal() {
+        editBackdrop.classList.remove("opacity-0", "pointer-events-none");
+        editFieldModal.classList.remove("opacity-0", "scale-90");
+    }
 
+    function closeEditModal() {
+        editBackdrop.classList.add("opacity-0", "pointer-events-none");
+        editFieldModal.classList.add("opacity-0", "scale-90");
+    }
+
+    if (closeEditModalBtn) {
+        closeEditModalBtn.addEventListener("click", closeEditModal);
+    }
+
+    // Delete Field Modal
+    const deleteBackdrop = document.getElementById("delete-field-modal-backdrop");
+    const deleteModal = document.getElementById("delete-field-modal");
+    const closeDeleteBtn = document.querySelector(".close-delete-modal");
+
+    function openDeleteModal() {
+        deleteBackdrop.classList.remove("opacity-0", "pointer-events-none");
+        deleteModal.classList.remove("opacity-0", "scale-90");
+    }
+
+    function closeDeleteModal() {
+        deleteBackdrop.classList.add("opacity-0", "pointer-events-none");
+        deleteModal.classList.add("opacity-0", "scale-90");
+    }
+
+    if (closeDeleteBtn) {
+        closeDeleteBtn.addEventListener("click", closeDeleteModal);
+    }
+
+    // Filter Logic
+    if (applyFilterBtn) {
+        applyFilterBtn.addEventListener('click', function() {
+            const searchText = searchInput.value;
+            const sortValue = sortSelect.value;
+            
+            const url = new URL(window.location.href);
+            if (searchText) {
+                url.searchParams.set('s', searchText);
+            } else {
+                url.searchParams.delete('s');
+            }
+
+            if (sortValue) {
+                url.searchParams.set('sort', sortValue);
+            } else {
+                url.searchParams.delete('sort');
+            }
+
+            // Reset page on filter change
+            url.searchParams.set('paged', 1);
+
+            window.location.href = url.toString();
+        });
+
+        // Trigger search on Enter
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                applyFilterBtn.click();
+            }
+        });
+    }
+    
+    // Auto-generate Callable in Add Modal
+    const addNameInput = document.getElementById("add--name");
+    const addCallableInput = document.getElementById("add--callable");
+    
+    if (addNameInput && addCallableInput) {
+        addNameInput.addEventListener("input", function() {
+            const slug = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+            if (slug) {
+                addCallableInput.value = `{${slug}}`;
+            } else {
+                addCallableInput.value = "";
+            }
+        });
+    }
+
+    // Global helper for opening modal from button (used in inline onclick)
+    window.openFieldModal = function() {
+        modalBackdrop.classList.remove("opacity-0", "pointer-events-none");
+        addFieldModal.classList.remove("opacity-0", "scale-90");
+    };
+
+    window.closeFieldModal = function() {
+        closeModal();
+    };
+
+    // Populate Edit Modal
+    if (list) {
+        list.addEventListener("click", function (e) {
+            if (e.target.closest(".edit-field")) {
+                const row = e.target.closest("tr");
+                const id = row.getAttribute("id");
+                
+                const name = row.querySelector(".field-name").textContent;
+                const value = row.querySelector(".field-value").textContent;
+                const callable = row.querySelector(".field-callable").textContent;
+
+                document.getElementById("edit--field_id").value = id;
+                document.getElementById("edit--name").value = name;
+                document.getElementById("edit--value").value = value;
+                document.getElementById("edit--callable").value = callable;
+
+                openEditModal();
+            }
+
+            if (e.target.closest(".remove-field")) {
+                const row = e.target.closest("tr");
+                const id = row.getAttribute("id");
+                document.getElementById("delete-field-id").value = id;
+                openDeleteModal();
+            }
+        });
+    }
 });

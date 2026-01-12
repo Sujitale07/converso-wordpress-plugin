@@ -1,200 +1,199 @@
-[2025-11-30 19:01:07] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:02:10] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:03:38] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:04:39] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:06:41] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:07:41] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:09:42] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:11:43] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:13:44] ERROR: AgentsApi CLASS LOADED
-[2025-11-30 19:15:45] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:06:17] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:06:43] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:07:50] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:08:51] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:10:52] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:12:53] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:13:53] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:13:56] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:13:59] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:14:03] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:14:04] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:15:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:16:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:17:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:18:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:19:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:20:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:21:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:22:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:23:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:23:13] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:23:21] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:24:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:25:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:26:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:27:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:28:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:29:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:30:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:31:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:33:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:35:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:37:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:39:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:41:34] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:42:23] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:42:31] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:42:39] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:42:39] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:42:39] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:42:42] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:43:44] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:45:44] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:47:45] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:49:46] ERROR: AgentsApi CLASS LOADED
-[2025-12-01 04:51:47] ERROR: AgentsApi CLASS LOADED
-[2025-12-07 00:42:47] ERROR: AgentsApi CLASS LOADED
-[2025-12-07 00:43:10] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:52:02] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:52:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:52:30] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:52:30] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:52:31] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:52:58] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:02] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:31] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:33] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:34] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:37] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:38] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:39] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:40] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:54:41] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:55:41] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:56:42] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 06:58:43] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:00:44] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:02:45] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:04:46] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:22:55] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:23:56] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:25:57] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:27:58] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:29:59] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:32:00] ERROR: AgentsApi CLASS LOADED
-[2025-12-08 07:34:44] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:51:54] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:18] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:23] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:23] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:23] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:24] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:25] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:26] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:26] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:29] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:48] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:50] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:51] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:52] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:54] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:56] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:52:59] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:00] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:22] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:24] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:26] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:27] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:27] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:29] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:53:30] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:54:32] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:56:32] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 15:58:33] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:00:34] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:02:35] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:04:36] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:06:37] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:08:38] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:10:39] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:12:40] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:14:41] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:16:42] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:18:43] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:20:44] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:22:45] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:24:46] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:26:47] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:28:48] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:30:49] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:32:50] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:34:51] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:36:52] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:38:53] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:40:54] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:42:55] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:44:56] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:46:57] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:48:58] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:50:59] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:53:00] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:55:01] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:57:02] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 16:59:03] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:01:04] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:03:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:05:06] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:07:08] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:09:08] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:11:09] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:13:10] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:15:11] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:17:12] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:19:13] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:21:14] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:23:15] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:23:18] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:23:34] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:23:35] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:23:37] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:23:38] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:24:39] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:26:39] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:26:54] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:26:56] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:26:59] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:27:02] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:28:03] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:30:03] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:32:04] ERROR: AgentsApi CLASS LOADED
-[2025-12-12 17:34:05] ERROR: AgentsApi CLASS LOADED
-[2025-12-14 07:24:14] DEBUG: Array
+[2026-01-12 17:00:00] INFO: Log Cleared for debugging.
+[2026-01-12 11:11:10] INFO: Array
 (
-    [is_default] => 1
-    [name] => Yala
-    [phone] => hawai
-    [greetings] => Yo Hi how can i help
-    [location] => 123123
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789508
+    [longitude] => 85.3283112
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
 )
 
-[2025-12-14 07:29:26] DEBUG: Array
+[2026-01-12 11:11:10] INFO: Filtering Agent for: nepal, bagamati province, lalitpur
+[2026-01-12 11:11:10] INFO: Total Agents in DB: 2
+[2026-01-12 11:11:10] INFO: Active Agents Count: 2
+[2026-01-12 11:11:10] INFO: No direct location match found. Checking for default agent...
+[2026-01-12 11:11:10] INFO: Returning Default Agent: Support Agent
+[2026-01-12 11:11:11] INFO: 0
+[2026-01-12 11:13:22] INFO: Array
 (
-    [is_default] => 1
-    [converso_agents_is_offline] => 1
-    [name] => haude
-    [phone] => 918232139213
-    [greetings] => Test
-    [location] => Kathmandu
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789508
+    [longitude] => 85.3283112
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
 )
 
-[2025-12-14 07:39:08] DEBUG: Array
+[2026-01-12 11:13:22] INFO: Filtering Agent for: nepal, bagamati province, lalitpur
+[2026-01-12 11:13:22] INFO: Total Agents in DB: 2
+[2026-01-12 11:13:22] INFO: Active Agents Count: 2
+[2026-01-12 11:13:22] INFO: Array
 (
-    [is_default] => 1
-    [converso_agents_is_offline] => 1
-    [name] => 777 bahadur
-    [phone] => 98123213123
-    [greetings] => I dont want to help btw
-    [location] => Aus
+    [Agent Name] => Sujit Ale Magar
+    [lalitpur] => lalitpur
+    [bagmati province] => bagamati province
+    [nepal] => nepal
 )
 
+[2026-01-12 11:13:22] INFO: Array
+(
+    [Agent Name] => Support Agent
+    [new york] => lalitpur
+    [] => bagamati province
+    [usa] => nepal
+)
+
+[2026-01-12 11:13:22] INFO: No direct location match found. Checking for default agent...
+[2026-01-12 11:13:22] INFO: Returning Default Agent: Support Agent
+[2026-01-12 11:13:22] INFO: 0
+[2026-01-12 11:14:25] INFO: Array
+(
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789508
+    [longitude] => 85.3283112
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
+)
+
+[2026-01-12 11:14:25] INFO: Filtering Agent for: nepal, bagamati province, lalitpur
+[2026-01-12 11:14:25] INFO: Total Agents in DB: 2
+[2026-01-12 11:14:25] INFO: Active Agents Count: 2
+[2026-01-12 11:14:25] INFO: Array
+(
+    [Agent Name] => Sujit Ale Magar
+    [lalitpur] => lalitpur
+    [bagmati province] => bagamati province
+    [nepal] => nepal
+)
+
+[2026-01-12 11:14:25] INFO: Array
+(
+    [Agent Name] => Support Agent
+    [new york] => lalitpur
+    [] => bagamati province
+    [usa] => nepal
+)
+
+[2026-01-12 11:14:25] INFO: No direct location match found. Checking for default agent...
+[2026-01-12 11:14:25] INFO: Returning Default Agent: Support Agent
+[2026-01-12 11:14:27] INFO: 0
+[2026-01-12 11:16:23] INFO: Array
+(
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789508
+    [longitude] => 85.3283112
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
+)
+
+[2026-01-12 11:16:23] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:16:23] INFO: Checking Agent: Sujit Ale Magar | Score: 35
+[2026-01-12 11:16:23] INFO: Match Found: Sujit Ale Magar with score 35
+[2026-01-12 11:16:24] INFO: 0
+[2026-01-12 11:17:04] INFO: Array
+(
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789161
+    [longitude] => 85.3284121
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
+)
+
+[2026-01-12 11:17:04] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:17:04] INFO: Checking Agent: Sujit Ale Magar | Score: 35
+[2026-01-12 11:17:04] INFO: Match Found: Sujit Ale Magar with score 35
+[2026-01-12 11:17:04] INFO: 0
+[2026-01-12 11:17:12] INFO: Array
+(
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789161
+    [longitude] => 85.3284121
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
+)
+
+[2026-01-12 11:17:12] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:17:12] INFO: Checking Agent: Sujit Ale Magar | Score: 35
+[2026-01-12 11:17:12] INFO: Match Found: Sujit Ale Magar with score 35
+[2026-01-12 11:17:13] INFO: 0
+[2026-01-12 11:17:59] INFO: Array
+(
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789319
+    [longitude] => 85.3283662
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
+)
+
+[2026-01-12 11:17:59] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:17:59] INFO: Checking Agent: Sujit Ale Magar | Score: 35
+[2026-01-12 11:17:59] INFO: Match Found: Sujit Ale Magar with score 35
+[2026-01-12 11:18:00] INFO: 24
+[2026-01-12 11:39:10] INFO: Plugin Deactivated. Tables dropped and options deleted.
+[2026-01-12 11:39:14] INFO: Plugin Activated. Migrations and Seeders ran.
+[2026-01-12 11:39:46] INFO: Array
+(
+    [road] => 
+    [city] => Lalitpur
+    [state] => Bagamati Province
+    [postcode] => 00779
+    [country] => Nepal
+    [latitude] => 27.6789319
+    [longitude] => 85.3283662
+    [display_name] => Chakupat, Lalitpur-11, Lalitpur, Lalitpur Metropolitan City, Lalitpur, Bagamati Province, 00779, Nepal
+)
+
+[2026-01-12 11:39:46] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:39:46] INFO: No strong location match found (Best Score: -1). Checking for default agent...
+[2026-01-12 11:39:46] INFO: Returning Default Agent: Support Agent
+[2026-01-12 11:39:48] INFO: 1
+[2026-01-12 11:44:10] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:44:10] INFO: No strong location match found (Best Score: -1). Checking for default agent...
+[2026-01-12 11:44:10] INFO: Returning Default Agent: Support Agent
+[2026-01-12 11:44:11] INFO: 2
+[2026-01-12 11:48:24] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:48:24] INFO: No strong location match found (Best Score: -1). Checking for default agent...
+[2026-01-12 11:48:24] INFO: Returning Default Agent: Support Agent
+[2026-01-12 11:48:28] INFO: 3
+[2026-01-12 11:48:29] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:48:29] INFO: No strong location match found (Best Score: -1). Checking for default agent...
+[2026-01-12 11:48:29] INFO: Returning Default Agent: Support Agent
+[2026-01-12 11:48:30] INFO: 4
+[2026-01-12 11:50:56] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:50:56] INFO: Checking Agent: Sujit Ale Magar | Score: 35
+[2026-01-12 11:50:56] INFO: Match Found: Sujit Ale Magar with score 35
+[2026-01-12 11:50:57] INFO: 5
+[2026-01-12 11:52:59] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:52:59] INFO: Checking Agent: Sujit Ale Magar | Score: 35
+[2026-01-12 11:52:59] INFO: Match Found: Sujit Ale Magar with score 35
+[2026-01-12 11:53:00] INFO: 6
+[2026-01-12 11:58:01] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 11:58:01] INFO: Checking Agent: Sujit Ale Magar | Score: 35
+[2026-01-12 11:58:01] INFO: Match Found: Sujit Ale Magar with score 35
+[2026-01-12 11:58:02] INFO: 7
+[2026-01-12 12:01:08] INFO: Normalized Visitor Location: Country[], State[], City[]
+[2026-01-12 12:01:08] INFO: No strong location match found (Best Score: -1). Checking for default agent...
+[2026-01-12 12:01:08] INFO: Returning Default Agent: Support Agent
+[2026-01-12 12:01:09] INFO: 8
+[2026-01-12 12:01:41] INFO: Plugin Deactivated. Tables dropped and options deleted.
+[2026-01-12 12:01:44] INFO: Plugin Activated. Migrations and Seeders ran.

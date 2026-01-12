@@ -4,8 +4,9 @@ namespace Converso\Admin;
 use Converso\Modules\Agents;
 use Converso\Modules\DynamicFields;
 use Converso\Modules\General;
+use Converso\Modules\Settings;
 use Converso\Modules\StylingAndPosition;
-
+use Converso\Core\Notification;
 class Admin {
 
     private $modules = [];
@@ -15,6 +16,9 @@ class Admin {
         $this->modules['agents']  = new Agents();
         $this->modules['dynamic-fields']  = new DynamicFields();
         $this->modules['styling-and-positioning']  = new StylingAndPosition();
+        $this->modules['settings'] = new Settings();
+        
+        Notification::init();
 
         add_action('admin_menu', [$this, 'register_admin_pages']);
         add_action("admin_enqueue_scripts", [$this, "enqueue_global_scripts"]);
@@ -65,6 +69,13 @@ class Admin {
                     $this->modules['styling-and-positioning'] = new StylingAndPosition();
                 }
                 $this->modules['styling-and-positioning']->render();
+                break;
+
+            case 'settings':
+                if (!isset($this->modules['settings'])) {
+                    $this->modules['settings'] = new Settings();
+                }
+                $this->modules['settings']->render();
                 break;
 
             case 'greetings':
