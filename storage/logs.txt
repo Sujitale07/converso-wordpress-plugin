@@ -197,3 +197,289 @@
 [2026-01-12 12:01:09] INFO: 8
 [2026-01-12 12:01:41] INFO: Plugin Deactivated. Tables dropped and options deleted.
 [2026-01-12 12:01:44] INFO: Plugin Activated. Migrations and Seeders ran.
+[2026-01-12 12:14:19] INFO: Normalized Visitor Location: Country[nepal], State[bagamati], City[lalitpur]
+[2026-01-12 12:14:19] INFO: No strong location match found (Best Score: -1). Checking for default agent...
+[2026-01-12 12:14:19] INFO: Returning Default Agent: Support Agent
+[2026-01-12 12:14:20] INFO: 1
+[2026-01-15 04:33:52] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:33:52] INFO: Checking Agent: USA-Agent_1768451632 | Score: 40
+[2026-01-15 04:33:52] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Alex Johnson 3 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Support Agent | Score: 40
+[2026-01-15 04:33:52] INFO: Match Found: Support Agent with score 40
+[2026-01-15 04:33:52] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:33:52] INFO: Checking Agent: UK-Agent_1768451632 | Score: 40
+[2026-01-15 04:33:52] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:33:52] INFO: Match Found: UK-Agent_1768451632 with score 40
+[2026-01-15 04:33:52] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:33:52] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:33:52] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:33:52] INFO: Returning Default Agent: Default-Agent_1768451632
+[2026-01-15 04:33:52] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:33:52] INFO: Checking Agent: USA-Agent_1768451632 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Alex Johnson 3 | Score: 40
+[2026-01-15 04:33:52] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Support Agent | Score: 0
+[2026-01-15 04:33:52] INFO: Match Found: Alex Johnson 3 with score 40
+[2026-01-15 04:33:52] INFO: Normalized Visitor Location: Country[unitedkingdom], State[london], City[unknown]
+[2026-01-15 04:33:52] INFO: Checking Agent: UK-Agent_1768451632 | Score: 0
+[2026-01-15 04:33:52] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:33:52] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:33:52] INFO: Returning Default Agent: Default-Agent_1768451632
+[2026-01-15 04:34:03] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:34:03] INFO: Checking Agent: USA-Agent_1768451643 | Score: 40
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: USA-Agent_1768451632 | Score: 40
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Alex Johnson 3 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Support Agent | Score: 40
+[2026-01-15 04:34:03] INFO: Match Found: Support Agent with score 40
+[2026-01-15 04:34:03] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:34:03] INFO: Checking Agent: UK-Agent_1768451643 | Score: 40
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: UK-Agent_1768451632 | Score: 40
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:03] INFO: Match Found: UK-Agent_1768451643 with score 40
+[2026-01-15 04:34:03] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:03] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:03] INFO: Returning Default Agent: Default-Agent_1768451643
+[2026-01-15 04:34:03] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:34:03] INFO: Checking Agent: USA-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: USA-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Alex Johnson 3 | Score: 40
+[2026-01-15 04:34:03] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Support Agent | Score: 0
+[2026-01-15 04:34:03] INFO: Match Found: Alex Johnson 3 with score 40
+[2026-01-15 04:34:03] INFO: Normalized Visitor Location: Country[unitedkingdom], State[london], City[unknown]
+[2026-01-15 04:34:03] INFO: Checking Agent: UK-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: UK-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:03] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:03] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:03] INFO: Returning Default Agent: Default-Agent_1768451643
+[2026-01-15 04:34:11] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:34:11] INFO: Checking Agent: USA-Agent_1768451651 | Score: 40
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: USA-Agent_1768451643 | Score: 40
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: USA-Agent_1768451632 | Score: 40
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Alex Johnson 3 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Support Agent | Score: 40
+[2026-01-15 04:34:11] INFO: Match Found: USA-Agent_1768451643 with score 40
+[2026-01-15 04:34:11] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:34:11] INFO: Checking Agent: UK-Agent_1768451651 | Score: 40
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: UK-Agent_1768451643 | Score: 40
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: UK-Agent_1768451632 | Score: 40
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:11] INFO: Match Found: UK-Agent_1768451643 with score 40
+[2026-01-15 04:34:11] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:11] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:11] INFO: Returning Default Agent: Default-Agent_1768451651
+[2026-01-15 04:34:11] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:34:11] INFO: Checking Agent: USA-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: USA-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: USA-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Alex Johnson 3 | Score: 40
+[2026-01-15 04:34:11] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Support Agent | Score: 0
+[2026-01-15 04:34:11] INFO: Match Found: Alex Johnson 3 with score 40
+[2026-01-15 04:34:11] INFO: Normalized Visitor Location: Country[unitedkingdom], State[london], City[unknown]
+[2026-01-15 04:34:11] INFO: Checking Agent: UK-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: UK-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: UK-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:11] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:11] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:11] INFO: Returning Default Agent: Default-Agent_1768451651
+[2026-01-15 04:34:26] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451666 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451666 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451651 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451643 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451632 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Alex Johnson 3 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Support Agent | Score: 40
+[2026-01-15 04:34:26] INFO: Match Found: USA-Agent_1768451643 with score 40
+[2026-01-15 04:34:26] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451666 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451666 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451651 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451643 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451632 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:26] INFO: Match Found: UK-Agent_1768451643 with score 40
+[2026-01-15 04:34:26] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451666 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:26] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:26] INFO: Returning Default Agent: Default-Agent_1768451666
+[2026-01-15 04:34:26] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451666 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451666 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: USA-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: John Doe 1 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Jane Smith 2 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Alex Johnson 3 | Score: 40
+[2026-01-15 04:34:26] INFO: Checking Agent: Sarah Wilson 4 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Michael Brown 5 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Support Agent | Score: 0
+[2026-01-15 04:34:26] INFO: Match Found: Alex Johnson 3 with score 40
+[2026-01-15 04:34:26] INFO: Normalized Visitor Location: Country[unitedkingdom], State[london], City[unknown]
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451666 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451666 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451651 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451643 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: UK-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:26] INFO: Checking Agent: Default-Agent_1768451632 | Score: 0
+[2026-01-15 04:34:26] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:26] INFO: Returning Default Agent: Default-Agent_1768451666
+[2026-01-15 04:34:54] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:34:54] INFO: Checking Agent: USA-Agent_1768451694 | Score: 40
+[2026-01-15 04:34:54] INFO: Checking Agent: Default-Agent_1768451694 | Score: 0
+[2026-01-15 04:34:54] INFO: Match Found: USA-Agent_1768451694 with score 40
+[2026-01-15 04:34:54] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:34:54] INFO: Checking Agent: UK-Agent_1768451694 | Score: 40
+[2026-01-15 04:34:54] INFO: Checking Agent: Default-Agent_1768451694 | Score: 0
+[2026-01-15 04:34:54] INFO: Match Found: UK-Agent_1768451694 with score 40
+[2026-01-15 04:34:54] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:34:54] INFO: Checking Agent: Default-Agent_1768451694 | Score: 0
+[2026-01-15 04:34:54] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:54] INFO: Returning Default Agent: Default-Agent_1768451694
+[2026-01-15 04:34:54] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:34:54] INFO: Checking Agent: USA-Agent_1768451694 | Score: 0
+[2026-01-15 04:34:54] INFO: Checking Agent: Default-Agent_1768451694 | Score: 0
+[2026-01-15 04:34:54] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:54] INFO: Returning Default Agent: Default-Agent_1768451694
+[2026-01-15 04:34:54] INFO: Normalized Visitor Location: Country[unitedkingdom], State[london], City[unknown]
+[2026-01-15 04:34:54] INFO: Checking Agent: UK-Agent_1768451694 | Score: 0
+[2026-01-15 04:34:54] INFO: Checking Agent: Default-Agent_1768451694 | Score: 0
+[2026-01-15 04:34:54] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:34:54] INFO: Returning Default Agent: Default-Agent_1768451694
+[2026-01-15 04:35:28] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:35:28] INFO: Checking Agent: USA-NY-Agent_1768451728 | Score: 40
+[2026-01-15 04:35:28] INFO: Checking Agent: USA-Only-Agent_1768451728 | Score: 10
+[2026-01-15 04:35:28] INFO: Checking Agent: Default-Agent_1768451728 | Score: 0
+[2026-01-15 04:35:28] INFO: Match Found: USA-NY-Agent_1768451728 with score 40
+[2026-01-15 04:35:28] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:35:28] INFO: Checking Agent: UK-London-Agent_1768451728 | Score: 40
+[2026-01-15 04:35:28] INFO: Checking Agent: Default-Agent_1768451728 | Score: 0
+[2026-01-15 04:35:28] INFO: Match Found: UK-London-Agent_1768451728 with score 40
+[2026-01-15 04:35:28] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:35:28] INFO: Checking Agent: Default-Agent_1768451728 | Score: 0
+[2026-01-15 04:35:28] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:35:28] INFO: Returning Default Agent: Default-Agent_1768451728
+[2026-01-15 04:35:28] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:35:28] INFO: Checking Agent: USA-NY-Agent_1768451728 | Score: 0
+[2026-01-15 04:35:28] INFO: Checking Agent: USA-Only-Agent_1768451728 | Score: 10
+[2026-01-15 04:35:28] INFO: Checking Agent: Default-Agent_1768451728 | Score: 0
+[2026-01-15 04:35:28] INFO: Match Found: USA-Only-Agent_1768451728 with score 10
+[2026-01-15 04:35:52] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:35:52] INFO: Checking Agent: USA-NY-Agent_1768451752 | Score: 40
+[2026-01-15 04:35:52] INFO: Checking Agent: USA-Only-Agent_1768451752 | Score: 10
+[2026-01-15 04:35:52] INFO: Checking Agent: Default-Agent_1768451752 | Score: 0
+[2026-01-15 04:35:52] INFO: Match Found: USA-NY-Agent_1768451752 with score 40
+[2026-01-15 04:35:52] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:35:52] INFO: Checking Agent: UK-London-Agent_1768451752 | Score: 40
+[2026-01-15 04:35:52] INFO: Checking Agent: Default-Agent_1768451752 | Score: 0
+[2026-01-15 04:35:52] INFO: Match Found: UK-London-Agent_1768451752 with score 40
+[2026-01-15 04:35:52] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:35:52] INFO: Checking Agent: Default-Agent_1768451752 | Score: 0
+[2026-01-15 04:35:52] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:35:52] INFO: Returning Default Agent: Default-Agent_1768451752
+[2026-01-15 04:35:52] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:35:52] INFO: Checking Agent: USA-NY-Agent_1768451752 | Score: 0
+[2026-01-15 04:35:52] INFO: Checking Agent: USA-Only-Agent_1768451752 | Score: 10
+[2026-01-15 04:35:52] INFO: Checking Agent: Default-Agent_1768451752 | Score: 0
+[2026-01-15 04:35:52] INFO: Match Found: USA-Only-Agent_1768451752 with score 10
+[2026-01-15 04:36:48] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 04:36:48] INFO: Checking Agent: USA-NY-Agent_1768451808 | Score: 40
+[2026-01-15 04:36:48] INFO: Checking Agent: USA-Only-Agent_1768451808 | Score: 10
+[2026-01-15 04:36:48] INFO: Checking Agent: Default-Agent_1768451808 | Score: 0
+[2026-01-15 04:36:48] INFO: Match Found: USA-NY-Agent_1768451808 with score 40
+[2026-01-15 04:36:48] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 04:36:48] INFO: Checking Agent: UK-London-Agent_1768451808 | Score: 40
+[2026-01-15 04:36:48] INFO: Checking Agent: Default-Agent_1768451808 | Score: 0
+[2026-01-15 04:36:48] INFO: Match Found: UK-London-Agent_1768451808 with score 40
+[2026-01-15 04:36:48] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 04:36:48] INFO: Checking Agent: Default-Agent_1768451808 | Score: 0
+[2026-01-15 04:36:48] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 04:36:48] INFO: Returning Default Agent: Default-Agent_1768451808
+[2026-01-15 04:36:48] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 04:36:48] INFO: Checking Agent: USA-NY-Agent_1768451808 | Score: 0
+[2026-01-15 04:36:48] INFO: Checking Agent: USA-Only-Agent_1768451808 | Score: 10
+[2026-01-15 04:36:48] INFO: Checking Agent: Default-Agent_1768451808 | Score: 0
+[2026-01-15 04:36:48] INFO: Match Found: USA-Only-Agent_1768451808 with score 10
+[2026-01-15 06:48:21] INFO: Plugin Deactivated. Tables dropped and options deleted.
+[2026-01-15 06:48:23] INFO: Plugin Activated. Migrations and Seeders ran.
+[2026-01-15 07:38:15] INFO: Normalized Visitor Location: Country[usa], State[], City[newyork]
+[2026-01-15 07:38:15] INFO: Checking Agent: USA-NY-Agent_1768462695 | Score: 40
+[2026-01-15 07:38:15] INFO: Checking Agent: USA-Only-Agent_1768462695 | Score: 10
+[2026-01-15 07:38:15] INFO: Checking Agent: Default-Agent_1768462695 | Score: 0
+[2026-01-15 07:38:15] INFO: Match Found: USA-NY-Agent_1768462695 with score 40
+[2026-01-15 07:38:15] INFO: Normalized Visitor Location: Country[unitedkingdom], State[], City[london]
+[2026-01-15 07:38:15] INFO: Checking Agent: UK-London-Agent_1768462695 | Score: 40
+[2026-01-15 07:38:15] INFO: Checking Agent: Default-Agent_1768462695 | Score: 0
+[2026-01-15 07:38:15] INFO: Match Found: UK-London-Agent_1768462695 with score 40
+[2026-01-15 07:38:15] INFO: Normalized Visitor Location: Country[france], State[], City[paris]
+[2026-01-15 07:38:15] INFO: Checking Agent: Default-Agent_1768462695 | Score: 0
+[2026-01-15 07:38:15] INFO: No strong location match found (Best Score: 0). Checking for default agent...
+[2026-01-15 07:38:15] INFO: Returning Default Agent: Default-Agent_1768462695
+[2026-01-15 07:38:15] INFO: Normalized Visitor Location: Country[usa], State[], City[losangeles]
+[2026-01-15 07:38:15] INFO: Checking Agent: USA-NY-Agent_1768462695 | Score: 0
+[2026-01-15 07:38:15] INFO: Checking Agent: USA-Only-Agent_1768462695 | Score: 10
+[2026-01-15 07:38:15] INFO: Checking Agent: Default-Agent_1768462695 | Score: 0
+[2026-01-15 07:38:15] INFO: Match Found: USA-Only-Agent_1768462695 with score 10

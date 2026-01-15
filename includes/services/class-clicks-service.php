@@ -52,4 +52,8 @@ class ClicksService{
     public static function get_visitors($id){
         
     }
+    public static function get_filtered_clicks($filters = []) {
+        $repo = new ConversoClicksRepository();
+        return $repo->get_filtered_clicks($filters);
+    }
 }

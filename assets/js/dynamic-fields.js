@@ -86,10 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Filter Logic
     if (applyFilterBtn) {
         applyFilterBtn.addEventListener('click', function() {
-            const searchText = searchInput.value;
-            const sortValue = sortSelect.value;
+            const searchText = searchInput ? searchInput.value : '';
+            const sortValue = sortSelect ? sortSelect.value : '';
             
             const url = new URL(window.location.href);
+            
             if (searchText) {
                 url.searchParams.set('s', searchText);
             } else {
@@ -109,11 +110,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Trigger search on Enter
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                applyFilterBtn.click();
-            }
-        });
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    applyFilterBtn.click();
+                }
+            });
+        }
     }
     
     // Auto-generate Callable in Add Modal

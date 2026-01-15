@@ -157,10 +157,13 @@ class DynamicFields {
         $search = $data['search'];
         $page = $data['page'];
         ?>
-        <div class="wrap relative !mt-5 !bg-white !p-6 !rounded">
+        <div class="wrap relative !mt-5 !bg-white !p-4 !px-6 !rounded">
             <div class=" flex justify-between items-center">
-                <h3 class="font-primary !mb-0 !mt-0 !text-xl">Dynamic Fields</h3>
-                
+                <div>
+                    <h3 class="font-primary !mb-0 !mt-0 !text-xl">Dynamic Fields</h3>
+                    <p class="!mt-2 !font-primary !text-sm !text-gray-500">Manage custom placeholders to personalize your WhatsApp messages</p>
+                </div>
+
                 <div>
                     <button onclick="openFieldModal()" class="bg-primary py-2 px-5 font-primary text-white rounded cursor-pointer"
                         id="add-field"><i class="ri-add-large-line mr-2"></i> Add Field</button>
@@ -320,7 +323,7 @@ class DynamicFields {
                 <div class="mt-6 flex justify-end gap-2">
                     <div class="flex gap-2">
                         <?php for ($i = 1; $i <= $total_pages; $i++): 
-                                $url = add_query_arg(['paged' => $i, 's' => $search, 'limit' => $limit]);
+                                $url = add_query_arg(['paged' => $i, 's' => $search, 'sort' => $filters['sort']]);
                         ?>
                             <a href="<?php echo esc_url($url); ?>" class="!px-4 !py-2 !font-primary rounded <?php echo $i === $page ? 'bg-primary !text-white' : 'bg-gray-200'; ?>">
                                 <?php echo $i; ?>

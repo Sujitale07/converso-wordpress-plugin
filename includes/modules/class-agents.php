@@ -331,9 +331,14 @@ class Agents {
         $search = $data['search'];
         $page = $data['page'];
         ?>
-<div class="wrap relative !bg-white !p-6 !rounded !mt-5">
+<div class="wrap relative !bg-white !p-4 !px-6 !rounded !mt-5">
     <div class=" flex justify-between items-center">
-        <h3 class="font-primary !mb-0 !mt-0 !text-xl">Agents Settings</h3>
+        <div>
+
+            <h3 class="font-primary !mb-0 !mt-0 !text-xl">Agents</h3>
+            <p class="!mt-2 !font-primary !text-sm !text-gray-500">Manage your WhatsApp support team and their availability</p>
+        </div>
+        
         
         <div>
             <button onclick="openModal()" class="bg-primary py-2 px-5 font-primary text-white rounded cursor-pointer !font-secondary"
@@ -349,7 +354,7 @@ class Agents {
                 <div class="absolute top-[53%] left-4 -translate-y-1/2">
                     <i class="ri-search-line"></i>
                 </div>
-                <input type="text" id="agent-search"  placeholder="Search by name or phone"
+                <input type="text" id="agent-search" value="<?php echo esc_attr($data['search']); ?>" placeholder="Search by name or phone"
                     class="w-full h-full rounded-lg  !font-secondary !text-xs !pl-8 !py-3 !bg-gray-200 !border-none">
             </div>
         </div>
@@ -363,8 +368,8 @@ class Agents {
                     class="w-full h-full rounded-lg  !font-secondary !text-xs !pl-10 !py-3 !bg-gray-200 !border-none"
                     id="agent-status">
                     <option value="">All Status</option>
-                    <option value="">Online</option>
-                    <option value="">Offline</option>
+                    <option value="online" <?php selected($data['status'], 'online'); ?>>Online</option>
+                    <option value="offline" <?php selected($data['status'], 'offline'); ?>>Offline</option>
                 </select>
             </div>
         </div>       
@@ -378,9 +383,9 @@ class Agents {
                     class="w-full h-full rounded-lg  !font-secondary !text-xs !pl-10 !py-3 !bg-gray-200 !border-none"
                     id="agent-sort">
                     <option value="">All</option>
-                    <option value="">Date Created</option>
-                    <option value="">Name</option>
-                    <option value="">Location</option>
+                    <option value="date" <?php selected($data['sort'], 'date'); ?>>Date Created</option>
+                    <option value="name" <?php selected($data['sort'], 'name'); ?>>Name</option>
+                    <option value="oldest" <?php selected($data['sort'], 'oldest'); ?>>Oldest</option>
                 </select>
             </div>
         </div>    
@@ -710,7 +715,8 @@ class Agents {
                                         $url = add_query_arg([
                                             'paged' => $i,
                                             's'     => $search,
-                                            'limit' => $limit,
+                                            'status' => $data['status'],
+                                            'sort'  => $data['sort'],
                                         ]);
                                     ?>
                     <a href="<?php echo esc_url($url); ?>"

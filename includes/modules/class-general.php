@@ -9,7 +9,6 @@ class General {
     }
 
     public function render() {
-        // Fetch saved values
         $business_name = get_option('converso_business_name', '');
         $business_type = get_option('converso_business_type', '');
         $cta_text = get_option('converso_cta_text', '');
@@ -49,7 +48,7 @@ class General {
         $recent_chats = ClicksService::get_recent_clicks(8);
         ?>
 
-        <div class="wrap relative !mt-8">
+        <div class="wrap relative !mt-5">
             <div class="grid grid-cols-12 gap-4 ">
                 <div class="h-full col-span-7 font-primary bg-white  rounded-lg !p-4 !px-6">
                     <h3 class="font-primary !mb-0 !mt-0 !text-xl">Overview</h3>
@@ -145,36 +144,6 @@ class General {
                 </div>
             </div>
 
-            <div class="grid grid-cols-12 gap-4 !mt-4">
-                <div class="h-full col-span-7 bg-white  rounded-lg !p-4 !px-6">
-                    <h3 class="font-primary !mb-0 !mt-0 !text-xl">Agents Activity</h3>
-                    <p class="!mt-2 !text-sm text-gray-500">Click counts by agent</p>
-                    <div class="!mt-4 space-y-3">
-                        <?php if (empty($agents_activity)) : ?>
-                            <p class="text-xs text-gray-400">No activity recorded yet.</p>
-                        <?php else : ?>
-                            <?php foreach (array_slice($agents_activity, 0, 5) as $activity) : ?>
-                                <div class="flex justify-between items-center text-sm">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-[10px]"><?php echo substr($activity->name ?: 'U', 0, 1); ?></div>
-                                        <span class="text-gray-600"><?php echo esc_html($activity->name ?: 'Unknown/Fallback'); ?></span>
-                                    </div>
-                                    <span class="font-semibold"><?php echo (int) $activity->clicks; ?> chats</span>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <div class="h-full col-span-5 font-primary bg-white  rounded-lg !p-4 !px-6">
-                    <h3 class="font-primary !mb-0 !mt-0 !text-xl">Integration & Test</h3>
-                    <p class="!mt-2 !text-sm text-gray-500">How Converso behaves on your site</p>
-                    <div class="!mt-4">
-                        <p class="text-xs text-gray-500 mb-2">Display Delay: <?php echo esc_html($display_delay); ?>s | Scroll Delay: <?php echo esc_html($scroll_delay); ?>%</p>
-                        <p class="text-xs text-gray-500">Routing Mode: <?php echo $enable_whatsapp ? 'Enabled' : 'Disabled'; ?></p>
-                    </div>
-                </div>
-            </div>
-
             <!-- New Analytics Data Rows -->
             <div class="grid grid-cols-12 gap-4 !mt-4">
                 <div class="h-full col-span-4 bg-white rounded-lg !p-4 !px-6">
@@ -247,6 +216,44 @@ class General {
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 !mt-4">
+                <div class="h-full col-span-12 bg-white rounded-lg !p-4 !px-6">
+                    <h3 class="font-primary !mb-0 !mt-0 !text-xl">Export Reports</h3>
+                    <p class="!mt-2 !text-sm text-gray-500">Download detailed CSV reports of your site's chat activity.</p>
+                    
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" class="!mt-6 flex flex-wrap gap-4 items-end">
+                        <input type="hidden" name="action" value="converso_export_report">
+                        <?php wp_nonce_field('converso_export_report_nonce'); ?>
+                        
+                        <div class="flex flex-col gap-1">
+                            <label class="text-xs font-semibold text-gray-500 !mb-1 !font-secondary">Filter by Agent</label>
+                            <select name="agent_id" class="!bg-gray-50  !h-10 !border-gray-200 !text-sm !rounded !py-2 !px-3">
+                                <option value="0">All Agents</option>
+                                <?php 
+                                $all_agents_data = AgentsService::get_agents(['limit' => 999]);
+                                foreach ($all_agents_data['agents'] as $agent): ?>
+                                    <option value="<?php echo (int)$agent['id']; ?>"><?php echo esc_html($agent['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label class="!text-xs !font-semibold !text-gray-500 !mb-1 !font-secondary">Start Date</label>
+                            <input type="date" name="start_date" class="!bg-gray-50 !h-10 !font-secondary !border-gray-200 !text-sm !rounded !py-2 !px-3">
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label class="!text-xs !font-semibold !text-gray-500 !mb-1 !font-secondary">End Date</label>
+                            <input type="date" name="end_date" class="!bg-gray-50 !h-10 !font-secondary !border-gray-200 !text-sm !rounded !py-2 !px-3">
+                        </div>
+
+                        <button type="submit" class="bg-gray-800 !font-secondary !h-10 !text-white !font-primary py-2 px-6 rounded font-primary text-sm transition-all hover:bg-black cursor-pointer">
+                            Download CSV Report
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

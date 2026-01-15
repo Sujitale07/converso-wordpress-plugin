@@ -48,9 +48,13 @@ class Settings {
             <form method="post" action="options.php" >
                 <?php settings_fields('converso_general_settings'); ?>
                 
-                <div class="!bg-white !p-6 !rounded">
+                <div class="!bg-white !p-4 !px-6  !rounded">
                     <div class="flex justify-between">
-                        <h3 class="font-primary !mb-6 !mt-0 !text-xl">General Settings</h3>
+                        <div class=" !mb-2">
+                            <h3 class="font-primary !my-0 !text-xl">General Settings</h3>
+                            <p class="!mt-2 !text-sm text-gray-500">Configure global behaviors and site-wide WhatsApp settings</p>
+                        </div>
+
                         <div>
                             <button type="submit" class="bg-primary py-2 px-5 font-primary text-white rounded cursor-pointer !font-secondary" > Save Settings</button>
                         </div>

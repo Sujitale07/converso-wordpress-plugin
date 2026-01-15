@@ -7,6 +7,7 @@ use Converso\Modules\General;
 use Converso\Modules\Settings;
 use Converso\Modules\StylingAndPosition;
 use Converso\Core\Notification;
+use Converso\Helpers\ReportExporter;
 class Admin {
 
     private $modules = [];
@@ -19,6 +20,7 @@ class Admin {
         $this->modules['settings'] = new Settings();
         
         Notification::init();
+        ReportExporter::init();
 
         add_action('admin_menu', [$this, 'register_admin_pages']);
         add_action("admin_enqueue_scripts", [$this, "enqueue_global_scripts"]);
@@ -40,8 +42,8 @@ class Admin {
         $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
 
         echo '<div class="wrap">';
-        echo '<h1 class="font-primary !mb-8 !font-bold">Converso - Whatsapp Lead Collection</h1>';
-        echo '<div class="mt-10">';
+        echo '<h1 class="font-primary !mb-4 !font-bold">Converso - Whatsapp Lead Collection</h1>';
+        echo '<div class="!mt-5">';
             $this->render_tab_link('general', 'General', $active_tab);
             $this->render_tab_link('agents', 'Agents', $active_tab);
             $this->render_tab_link('dynamic-fields', 'Dynamic Fields', $active_tab);        

@@ -122,4 +122,40 @@ class ConversoClicksRepository
         return $wpdb->get_results($sql);
     }
 
+    public function get_filtered_clicks($filters = []) {
+        global $wpdb;
+        $agents_table = $wpdb->prefix . 'converso_agents';
+        
+        $where = ["1=1"];
+        $params = [];
+
+        if (!empty($filters['agent_id'])) {
+            $where[] = "c.agent_id = %d";
+            $params[] = $filters['agent_id'];
+        }
+
+        if (!empty($filters['start_date'])) {
+            $where[] = "c.stat_date >= %s";
+            $params[] = $filters['start_date'];
+        }
+
+        if (!empty($filters['end_date'])) {
+            $where[] = "c.stat_date <= %s";
+            $params[] = $filters['end_date'];
+        }
+
+        $where_clause = implode(" AND ", $where);
+        
+        $sql = "SELECT c.*, a.name as agent_name 
+                FROM {$this->table_name} c 
+                LEFT JOIN {$agents_table} a ON c.agent_id = a.id 
+                WHERE $where_clause 
+                ORDER BY c.created_at DESC";
+
+        if (!empty($params)) {
+            $sql = $wpdb->prepare($sql, ...$params);
+        }
+
+        return $wpdb->get_results($sql);
+    }
 }
