@@ -2,6 +2,8 @@
 namespace Converso\Modules;
 
 use Converso\Core\Log\Log;
+use Converso\Services\AgentsService;
+use Converso\Core\Notification;
 
 class Agents {
 
@@ -18,7 +20,12 @@ class Agents {
     public function enqueue_assets($hook) {
         if ($hook !== 'toplevel_page_converso') return;
 
-        wp_enqueue_media(); 
+        $tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
+        if ($tab !== 'agents') return;
+
+        if ( ! did_action( 'wp_enqueue_media' ) ) {
+            wp_enqueue_media();
+        } 
 
         wp_enqueue_script(
             'converso-agents-js',
@@ -59,11 +66,6 @@ class Agents {
         }
 
         check_admin_referer('converso_agents');
-
-        $agents = get_option('converso_agents_data', []);
-        if (!is_array($agents)) {
-            $agents = [];
-        }
     
         $errors = [];
 
@@ -95,7 +97,8 @@ class Agents {
 
         $is_default = isset($_POST['is_default']) && $_POST['is_default'] === '1';
 
-        $is_offline = isset($_POST['status']) && $_POST['status'] === '1';
+        // Checkbox checked = '1' = Enabled/Online.
+        $is_online = isset($_POST['status']) && $_POST['status'] === '1';
 
         if (!empty($errors)) {
             wp_redirect(
@@ -106,36 +109,33 @@ class Agents {
             );
             exit;
         }
+
+        $location_array = explode(',', $location);
+        $location_city = $location_array[0];
+        $location_state = $location_array[1];
+        $location_country = $location_array[2];
+
+        $agent_data = [
+            'uuid'          => wp_generate_uuid4(),
+            'name'          => $name,
+            'phone'         => $phone,
+            'greeting'      => $greetings,
+            'location_city' => $location_city,
+            'location_state' => $location_state,
+            'location_country' => $location_country,
+            'photo_url'     => $photo,
+            'is_default'    => $is_default ? 1 : 0,
+            'is_active'     => $is_online ? 1 : 0,
+            'created_at'    => current_time('mysql'),
+        ];
+
+        AgentsService::create_agent($agent_data);
     
-        if ($is_default) {
-            foreach ($agents as &$agent) {
-                $agent['default'] = false;
-            }
-            unset($agent);
-        } 
-
-        $agents[] = [
-            'id'        => wp_generate_uuid4(),
-            'name'      => $name,
-            'phone'     => $phone,
-            'greetings' => $greetings,
-            'location'  => $location,
-            'photo'     => $photo,
-            'default'   => $is_default,
-            'converso_agents_is_offline' => !$is_offline,
-            'created_at' => current_time('mysql'),
-        ];       
-
-        if (!array_filter($agents, fn($a) => !empty($a['default']))) {
-            $agents[0]['default'] = true;
-        }
-        
-        update_option('converso_agents_data', $agents);
+        Notification::success('Agent added successfully!', 'Success');
 
         wp_redirect(
             add_query_arg(
-                'agent_added',
-                1,
+                [],
                 admin_url('admin.php?page=converso&tab=agents')
             )
         );
@@ -159,14 +159,7 @@ class Agents {
         // Nonce check
         check_admin_referer('converso_agents');
 
-        // Get agents
-        $agents = get_option('converso_agents_data', []);
-        if (!is_array($agents)) {
-            $agents = [];
-        }
-
         $errors = [];
-
     
         $agent_id = sanitize_text_field($_POST['agent_id'] ?? '');
         if (empty($agent_id)) {
@@ -215,74 +208,36 @@ class Agents {
             exit;
         }
 
-        /* =========================
-        Handle Default Agent
-        ========================== */
-        if ($is_default) {
-            foreach ($agents as &$agent) {
-                $agent['default'] = false;
-            }
-            unset($agent);
+        
+        $location_array = explode(',', $location);
+
+        $location_city = $location_array[0];
+        $location_state = $location_array[1];
+        $location_country = $location_array[2];
+
+        $update_data = [
+            'name'          => $name,
+            'phone'         => $phone,
+            'greeting'      => $greetings,
+            'location_city' => $location_city,
+            'location_state' => $location_state,
+            'location_country' => $location_country,
+            'is_default'    => $is_default ? 1 : 0,
+            'is_active'     => $is_online ? 1 : 0,
+            'updated_at'    => current_time('mysql'),
+        ];
+
+        if (!empty($new_photo)) {
+            $update_data['photo_url'] = $new_photo;
         }
 
-        /* =========================
-        Update Agent
-        ========================== */
-        $found = false;
+        AgentsService::update_agent($agent_id, $update_data);
 
-        foreach ($agents as &$agent) {
-            if ($agent['id'] === $agent_id) {
-
-                $agent['name']      = $name;
-                $agent['phone']     = $phone;
-                $agent['greetings'] = $greetings;
-                $agent['location']  = $location;
-
-                // ✅ PHOTO PRESERVATION LOGIC
-                // Only update photo if a new one is provided
-                if (!empty($new_photo)) {
-                    $agent['photo'] = $new_photo;
-                }
-
-                $agent['default'] = $is_default;
-                $agent['converso_agents_is_offline'] = !$is_online;
-                $agent['updated_at'] = current_time('mysql');
-
-                $found = true;
-                break;
-            }
-        }
-        unset($agent);
-
-        /* =========================
-        Agent Not Found
-        ========================== */
-        if (!$found) {
-            wp_redirect(
-                add_query_arg(
-                    ['agent_error' => 'agent_not_found'],
-                    admin_url('admin.php?page=converso&tab=agents')
-                )
-            );
-            exit;
-        }
-
-        /* =========================
-        Ensure One Default Agent
-        ========================== */
-        if (!array_filter($agents, fn($a) => !empty($a['default']))) {
-            $agents[0]['default'] = true;
-        }
-
-        /* =========================
-        Save & Redirect
-        ========================== */
-        update_option('converso_agents_data', $agents);
+        Notification::success('Agent updated successfully!', 'Success');
 
         wp_redirect(
             add_query_arg(
-                'agent_updated',
-                1,
+                [],
                 admin_url('admin.php?page=converso&tab=agents')
             )
         );
@@ -311,26 +266,17 @@ class Agents {
             exit;
         }
 
-        $agents = get_option('converso_agents_data', []);
-        if (!is_array($agents)) {
-            $agents = [];
+        $result = AgentsService::delete_agent($agent_id);
+
+        if ($result === false) {
+            Notification::error('Cannot delete the last remaining agent.', 'Error');
+        } else {
+            Notification::success('Agent deleted successfully!', 'Deleted');
         }
-
-        $agents = array_values(array_filter($agents, function ($agent) use ($agent_id) {
-            return $agent['id'] !== $agent_id;
-        }));
-
-        // Ensure one default agent exists
-        if (!array_filter($agents, fn($a) => !empty($a['default'])) && !empty($agents)) {
-            $agents[0]['default'] = true;
-        }
-
-        update_option('converso_agents_data', $agents);
 
         wp_redirect(
             add_query_arg(
-                'agent_deleted',
-                1,
+                [],
                 admin_url('admin.php?page=converso&tab=agents')
             )
         );
@@ -339,55 +285,39 @@ class Agents {
 
     public function get_agents() {
 
-        $agents = get_option('converso_agents_data', []);
-        if (!is_array($agents)) {
-            $agents = [];
-        }
+        $filters = [];
+        $filters['search'] = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : '';
+        $filters['status'] = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : '';
+        $filters['sort']   = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : '';
+        $filters['page']   = isset($_GET['paged']) ? max(1, (int) $_GET['paged']) : 1;
+        $filters['limit']  = isset($_GET['limit']) ? max(1, (int) $_GET['limit']) : 5;
 
-        $search = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : '';
-        $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : '';
-        $sort   = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : '';
-
-        $page  = isset($_GET['paged']) ? max(1, (int) $_GET['paged']) : 1;
-        $limit = isset($_GET['limit']) ? max(1, (int) $_GET['limit']) : 5;
-
-        if ($search) {
-            $agents = array_filter($agents, function ($agent) use ($search) {
-                return
-                    stripos($agent['name'] ?? '', $search) !== false ||
-                    stripos($agent['phone'] ?? '', $search) !== false;
-            });
-        }
-
-        if ($status) {
-            $agents = array_filter($agents, function ($agent) use ($status) {
-                return ($agent['status'] ?? '') === $status;
-            });
-        }
-
-        if ($sort === 'name') {
-            usort($agents, fn($a, $b) => strcmp($a['name'] ?? '', $b['name'] ?? ''));
-        }
-
-        if ($sort === 'date') {
-            usort($agents, fn($a, $b) => strtotime($b['created_at'] ?? '') - strtotime($a['created_at'] ?? ''));
-        }
-    
-        $total_agents = count($agents);
-        $total_pages  = (int) ceil($total_agents / $limit);
-        $offset       = ($page - 1) * $limit;
-
-        $agents = array_slice($agents, $offset, $limit);
+        $result = AgentsService::get_agents($filters);
+        
+        $mapped_agents = array_map(function($row) {
+            return [
+                'id'        => $row['id'],
+                'name'      => $row['name'],
+                'phone'     => $row['phone'],
+                'greetings' => $row['greeting'], // Map greeting -> greetings
+                'location'  => $row['location_city'] . ', ' . $row['location_state'] . ', ' . $row['location_country'], // Map location_city -> location
+                'photo'     => $row['photo_url'], // Map photo_url -> photo
+                'default'   => $row['is_default'] == 1,
+                'converso_agents_is_offline' => $row['is_active'] == 0, // Invert Active -> Offline
+                'status'    => $row['is_active'] == 1 ? 'online' : 'offline', // Added for completeness
+                'created_at'=> $row['created_at']
+            ];
+        }, $result['agents']);
 
         return [
-            "agents"       => array_values($agents),
-            "total_pages"  => $total_pages,
-            "total_agents" => $total_agents,
-            "page"         => $page,
-            "limit"        => $limit,
-            "search"       => $search,
-            "status"       => $status,
-            "sort"         => $sort
+            "agents"       => $mapped_agents,
+            "total_pages"  => $result['total_pages'],
+            "total_agents" => $result['total_agents'],
+            "page"         => $result['page'],
+            "limit"        => $result['limit'],
+            "search"       => $result['search'],
+            "status"       => $result['status'],
+            "sort"         => $result['sort']
         ];
     }
 
@@ -401,12 +331,17 @@ class Agents {
         $search = $data['search'];
         $page = $data['page'];
         ?>
-<div class="wrap relative">
-    <div class="!mt-5 flex justify-between items-center">
-        <h3 class="font-primary !mb-0 !mt-0 !text-xl">Agents Settings</h3>
+<div class="wrap relative !bg-white !p-4 !px-6 !rounded !mt-5">
+    <div class=" flex justify-between items-center">
+        <div>
+
+            <h3 class="font-primary !mb-0 !mt-0 !text-xl">Agents</h3>
+            <p class="!mt-2 !font-primary !text-sm !text-gray-500">Manage your WhatsApp support team and their availability</p>
+        </div>
+        
         
         <div>
-            <button onclick="openModal()" class="bg-primary py-2 px-5 font-primary text-white rounded cursor-pointer"
+            <button onclick="openModal()" class="bg-primary py-2 px-5 font-primary text-white rounded cursor-pointer !font-secondary"
                 id="add-agent"><i class="ri-add-large-line mr-2"></i> Add Agent</button>
         </div>
     </div>
@@ -419,7 +354,7 @@ class Agents {
                 <div class="absolute top-[53%] left-4 -translate-y-1/2">
                     <i class="ri-search-line"></i>
                 </div>
-                <input type="text" id="agent-search"  placeholder="Search by name or phone"
+                <input type="text" id="agent-search" value="<?php echo esc_attr($data['search']); ?>" placeholder="Search by name or phone"
                     class="w-full h-full rounded-lg  !font-secondary !text-xs !pl-8 !py-3 !bg-gray-200 !border-none">
             </div>
         </div>
@@ -433,8 +368,8 @@ class Agents {
                     class="w-full h-full rounded-lg  !font-secondary !text-xs !pl-10 !py-3 !bg-gray-200 !border-none"
                     id="agent-status">
                     <option value="">All Status</option>
-                    <option value="">Online</option>
-                    <option value="">Offline</option>
+                    <option value="online" <?php selected($data['status'], 'online'); ?>>Online</option>
+                    <option value="offline" <?php selected($data['status'], 'offline'); ?>>Offline</option>
                 </select>
             </div>
         </div>       
@@ -448,14 +383,14 @@ class Agents {
                     class="w-full h-full rounded-lg  !font-secondary !text-xs !pl-10 !py-3 !bg-gray-200 !border-none"
                     id="agent-sort">
                     <option value="">All</option>
-                    <option value="">Date Created</option>
-                    <option value="">Name</option>
-                    <option value="">Location</option>
+                    <option value="date" <?php selected($data['sort'], 'date'); ?>>Date Created</option>
+                    <option value="name" <?php selected($data['sort'], 'name'); ?>>Name</option>
+                    <option value="oldest" <?php selected($data['sort'], 'oldest'); ?>>Oldest</option>
                 </select>
             </div>
         </div>    
         <div class="w-1/5">        
-            <button class="bg-gray-800 w-full py-2 px-5 !font-primary text-white rounded cursor-pointer" id="apply-filter"> Apply Filter</button>
+            <button class="bg-gray-800 w-full !py-3 px-5 !font-primary text-white rounded cursor-pointer" id="apply-filter"> Apply Filter</button>
         </div>
     </div>
     
@@ -466,7 +401,7 @@ class Agents {
     <div id="modalBackdrop"
         class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
         <div id="addAgentModal"
-            class="add-agent-modal opacity-0 scale-90 !px-6 !py-5 !h-[80%]  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out overflow-y-scroll">
+            class="add-agent-modal opacity-0 scale-90 !px-6 !py-5 !max-h-[70%]  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out overflow-y-scroll">
             <div class="flex justify-between items-center mb-2">
                 <h2 class="text-xl !m-0 font-semibold" style="font-family: var(--font-primary);">
                     Add New Agent
@@ -607,7 +542,7 @@ class Agents {
     <div id="edit-agent-modal-backdrop"
         class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
         <div id="edit-agent-modal"
-            class="add-agent-modal opacity-0 scale-90 !px-6 !py-5  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out overflow-y-scroll max-h-[50%]">
+            class="add-agent-modal opacity-0 scale-90 !px-6 !py-5  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out overflow-y-scroll max-h-[70%]">
 
             <div class="flex justify-between items-center mb-2">
                 <h2 class="text-xl !m-0 font-semibold" style="font-family: var(--font-primary);">
@@ -736,13 +671,13 @@ class Agents {
                         <?php echo esc_attr($agent['greetings']); ?>
                     </td>
                     <td>
-                        <img src="<?php echo esc_attr($agent['photo'] ?? ''); ?>"
+                        <img src="<?php echo esc_attr($agent['photo'] ?? CONVERSO_PLUGIN_URL . 'assets/img/person-dummy.jpg'); ?>"
                             class="agent-image rounded-full w-full aspect-square max-w-7 object-cover" alt="">
                     </td>
                     <td class="">
-                        <h3 class="!text-sm !text-gray-800 !font-normal !font-primary agent-name">
-                            <?php echo esc_attr($agent['name']); ?>   <?php echo !empty($agent['default']) 
-                                ? "<span class='bg-cyan-600 ml-2 rounded-xl !text-xs !font-primary px-4 py-1 text-gray-100'>Default</span>" 
+                        <h3 class="!text-sm !text-gray-800 !font-normal !font-primary ">
+                            <span class="agent-name"><?php echo esc_attr($agent['name']); ?></span>   <?php echo !empty($agent['default']) 
+                                ? "<span class='bg-cyan-600 ml-2 agent-is-default rounded-xl !text-xs !font-primary px-4 py-1 text-gray-100'>Default</span>" 
                                 : ""; 
                             ?>
                         </h3>
@@ -780,7 +715,8 @@ class Agents {
                                         $url = add_query_arg([
                                             'paged' => $i,
                                             's'     => $search,
-                                            'limit' => $limit,
+                                            'status' => $data['status'],
+                                            'sort'  => $data['sort'],
                                         ]);
                                     ?>
                     <a href="<?php echo esc_url($url); ?>"

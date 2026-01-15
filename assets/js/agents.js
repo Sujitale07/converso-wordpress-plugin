@@ -188,8 +188,55 @@ function initAgentPhotoPickers() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     initAgentPhotoPickers();
+    initLocationSelect();
+    
+    // Filter Logic
+    const applyFilterBtn = document.getElementById('apply-filter');
+    const searchInput = document.getElementById('agent-search');
+    const statusSelect = document.getElementById('agent-status');
+    const sortSelect = document.getElementById('agent-sort');
+
+    if (applyFilterBtn) {
+        applyFilterBtn.addEventListener('click', function() {
+            const searchText = searchInput.value;
+            const statusValue = statusSelect.value;
+            const sortValue = sortSelect.value;
+            
+            const url = new URL(window.location.href);
+            
+            if (searchText) {
+                url.searchParams.set('s', searchText);
+            } else {
+                url.searchParams.delete('s');
+            }
+
+            if (statusValue) {
+                url.searchParams.set('status', statusValue);
+            } else {
+                url.searchParams.delete('status');
+            }
+
+            if (sortValue) {
+                url.searchParams.set('sort', sortValue);
+            } else {
+                url.searchParams.delete('sort');
+            }
+
+            // Reset page on filter change
+            url.searchParams.set('paged', 1);
+
+            window.location.href = url.toString();
+        });
+
+        // Trigger search on Enter
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                applyFilterBtn.click();
+            }
+        });
+    }
 });
 
 let activeTargetInput = null;

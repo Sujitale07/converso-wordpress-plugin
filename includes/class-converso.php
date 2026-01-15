@@ -18,7 +18,7 @@ final class Converso{
     }
 
     protected function init_hooks() {
-        // Example:
+        
         new Frontend();
 
         if ( is_admin() ) {

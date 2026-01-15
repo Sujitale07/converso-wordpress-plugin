@@ -1,6 +1,6 @@
 <?php 
 
-namespace Converso\Core\Log;
+namespace Converso\Core;
 
 class Log {
 

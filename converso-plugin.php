@@ -29,5 +29,11 @@ require_once CONVERSO_PLUGIN_DIR . 'includes/core/class-loader.php';
 // Include main Converso class manually or let autoloader handle it
 require_once CONVERSO_PLUGIN_DIR . 'includes/class-converso.php';
 
+// Register Activation Hook
+register_activation_hook(__FILE__, [\Converso\Core\Activator::class, 'activate']);
+
+// Register Deactivation Hook
+register_deactivation_hook(__FILE__, [\Converso\Core\Deactivator::class, 'deactivate']);
+
 // Initialize plugin
 \Converso::get_instance();

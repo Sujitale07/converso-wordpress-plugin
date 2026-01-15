@@ -2,142 +2,237 @@
 
 namespace Converso\Helpers;
 
-use Converso\Core\Log\Log;
+use Converso\Core\Log;
+use Converso\Services\AgentsService;
 
 class Helper {
 
     public static function get_client_location($lat, $lon) {
 
-        // Sanitize input
+        // Default empty structure
+        $location = [
+            'city'    => 'Unknown',
+            'state'   => '',
+            'country' => 'Unknown',
+            'road'    => '',
+            'postcode'=> ''
+        ];
+
         $lat = sanitize_text_field($lat);
         $lon = sanitize_text_field($lon);
 
         if (!$lat || !$lon) {
-            return [
-                'error' => 'Missing latitude or longitude'
-            ];
+            return $location;
         }
 
         $url = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json&accept-language=en";
 
         $args = [
-            'headers' => [
-                'User-Agent' => 'ConversoPlugin/1.0 (https://yourwebsite.com)',
-            ],
+            'headers' => [ 'User-Agent' => 'ConversoPlugin/1.0' ],
             'timeout' => 15
         ];
 
         $res = wp_remote_get($url, $args);
 
         if (is_wp_error($res)) {
-            return [
-                'error' => 'API request failed'
-            ];
+            Log::info("Nominatim API Error: " . $res->get_error_message());
+            return $location;
         }
 
         $body = wp_remote_retrieve_body($res);
-
-        if (!$body) {
-            return [
-                'error' => 'Empty response from Nominatim'
-            ];
-        }
-
         $data = json_decode($body, true);
 
-        if (!$data) {
-            return [
-                'error' => 'Failed to decode API response'
-            ];
+        if (!$data || !isset($data['address'])) {
+            return $location;
         }
 
-        // Return only useful fields as a simple array
+        $addr = $data['address'];
         return [
-            'road'      => $data['address']['road'] ?? '',
-            'city'      => $data['address']['city'] ?? $data['address']['town'] ?? $data['address']['village'] ?? '',
-            'state'     => $data['address']['state'] ?? '',
-            'postcode'  => $data['address']['postcode'] ?? '',
-            'country'   => $data['address']['country'] ?? '',
-            'latitude'  => $data['lat'] ?? '',
-            'longitude' => $data['lon'] ?? '',
-            'display_name' => $data['display_name'] ?? ''
+            'city'    => $addr['city'] ?? $addr['town'] ?? $addr['village'] ?? 'Unknown',
+            'state'   => $addr['state'] ?? '',
+            'country' => $addr['country'] ?? 'Unknown',
+            'road'    => $addr['road'] ?? '',
+            'postcode'=> $addr['postcode'] ?? ''
         ];
     }
 
-    public static function filter_agent(array $agents, array $locationParts)
+    public static function get_client_location_by_ip() {
+        $location = [
+            'city'    => 'Unknown',
+            'state'   => '',
+            'country' => 'Unknown'
+        ];
+
+        $ip = '';
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+        }
+
+        if (empty($ip) || $ip === '127.0.0.1' || $ip === '::1') {
+            return $location;
+        }
+
+        $url = "http://ip-api.com/json/{$ip}";
+        $res = wp_remote_get($url, ['timeout' => 5]);
+
+        if (is_wp_error($res)) {
+            Log::info("IP-API Error: " . $res->get_error_message());
+            return $location;
+        }
+
+        $data = json_decode(wp_remote_retrieve_body($res), true);
+        if (!$data || $data['status'] !== 'success') {
+            return $location;
+        }
+
+        return [
+            'city'    => $data['city'] ?? 'Unknown',
+            'state'   => $data['regionName'] ?? '',
+            'country' => $data['country'] ?? 'Unknown'
+        ];
+    }
+
+    public static function filter_agent(array $locationParts = [])
     {
-        $city    = strtolower(trim($locationParts['city'] ?? ''));
-        $state   = strtolower(trim($locationParts['state'] ?? ''));
-        $country = strtolower(trim($locationParts['country'] ?? ''));
+        // Helper to normalize strings for comparison
+        $normalize = function($str) {
+            if (empty($str)) return '';
+            $str = strtolower(trim($str));
+            $str = str_replace([' province', ' state', ' department', ' region'], '', $str);
+            return preg_replace('/[^a-z0-9]/', '', $str); // Remove all non-alphanumeric
+        };
 
-        // Normalize agent locations
-        foreach ($agents as &$agent) {
-            $agent['location_lower'] = strtolower($agent['location'] ?? '');
-        }
+        $vCity    = isset($locationParts['city']) ? $normalize($locationParts['city']) : '';
+        $vState   = isset($locationParts['state']) ? $normalize($locationParts['state']) : '';
+        $vCountry = isset($locationParts['country']) ? $normalize($locationParts['country']) : '';
 
-        $onlineAgents = array_filter($agents, function ($agent) {
-            return !empty(!$agent['converso_agents_is_offline']);
+        Log::info("Normalized Visitor Location: Country[$vCountry], State[$vState], City[$vCity]");
+
+        $agents_data = AgentsService::get_agents(['limit' => 999]);
+        $agents = isset($agents_data['agents']) ? $agents_data['agents'] : [];        
+
+        $activeAgents = array_filter($agents, function($agent) {
+            return isset($agent['is_active']) && (int)$agent['is_active'] === 1;
         });
 
-        $cityMatches = array_filter($onlineAgents, function ($agent) use ($city) {
-            return $city && stripos($agent['location_lower'], $city) !== false;
-        });
+        $bestMatches = [];
+        $bestScore = -1;
 
-        if (count($cityMatches) === 1) {
-            return array_values($cityMatches)[0];
-        }
+        foreach ($activeAgents as $agent) {
+            $score = 0;
 
-        $stateMatches = array_filter($cityMatches, function ($agent) use ($state) {
-            return $state && stripos($agent['location_lower'], $state) !== false;
-        });
+            $aCity    = $normalize($agent['location_city'] ?? '');
+            $aState   = $normalize($agent['location_state'] ?? '');
+            $aCountry = $normalize($agent['location_country'] ?? '');
 
-        if (count($stateMatches) === 1) {
-            return array_values($stateMatches)[0];
-        }
-
-        $countryMatches = array_filter(
-            $stateMatches ?: $cityMatches,
-            function ($agent) use ($country) {
-                return $country && stripos($agent['location_lower'], $country) !== false;
+            // 1. Strict Requirement: Country must match IF agent specifies one
+            if (!empty($aCountry)) {
+                if ($aCountry !== $vCountry) {
+                    continue; // Skip if in a different country
+                }
+                $score += 10;
             }
-        );
 
-        if (count($countryMatches) === 1) {
-            return array_values($countryMatches)[0];
+            // 2. Score City and State
+            if (!empty($aState)) {
+                if ($aState === $vState) {
+                    $score += 20;
+                } else if (!empty($vState)) {
+                    // Mismatch in defined state - lower priority but don't strictly skip if country/city match
+                    $score -= 5; 
+                }
+            }
+
+            if (!empty($aCity)) {
+                if ($aCity === $vCity) {
+                    $score += 30;
+                } else if (!empty($vCity)) {
+                    $score -= 10;
+                }
+            }
+
+            Log::info("Checking Agent: " . ($agent['name'] ?? 'ID:'.$agent['id']) . " | Score: " . $score);
+
+            if ($score > $bestScore) {
+                $bestScore = $score;
+                $bestMatches = [$agent];
+            } elseif ($score === $bestScore && $score >= 0) {
+                $bestMatches[] = $agent;
+            }
         }
 
-        foreach ($agents as $agent) {
-            if (!empty($agent['default']) && !empty($agent['is_online'])) {
+        if ($bestScore >= 10 && !empty($bestMatches)) {
+            $selected = $bestMatches[array_rand($bestMatches)];
+            Log::info("Match Found: " . ($selected['name'] ?? 'ID:'.$selected['id']) . " with score " . $bestScore);
+            return $selected;
+        }
+
+        Log::info("No strong location match found (Best Score: $bestScore). Checking for default agent...");
+
+        foreach ($activeAgents as $agent) {
+            if (isset($agent['is_default']) && (int)$agent['is_default'] === 1) {
+                Log::info("Returning Default Agent: " . ($agent['name'] ?? 'ID:'.$agent['id']));
                 return $agent;
             }
         }
 
-        foreach ($agents as $agent) {
-            if (!empty($agent['default'])) {
-                return $agent;
-            }
+        if (!empty($activeAgents)) {
+            $fallback = reset($activeAgents);
+            Log::info("No default found. Falling back to first available active agent: " . ($fallback['name'] ?? 'ID:'.$fallback['id']));
+            return $fallback;
+        }
+
+        Log::info("CRITICAL: No active agents found at all.");
+
+        // Check if Fallback to Primary Number is enabled
+        $fallback_enabled = get_option('converso_fallback_primary_number', '');
+        $primary_number = get_option('converso_primary_number', '');
+
+        if ($fallback_enabled === '1' && !empty($primary_number)) {
+            // Return pseudo-agent
+            return [
+                'id' => 0,
+                'name' => 'Support',
+                'phone' => $primary_number,
+                'photo_url' => '', 
+                'greeting' => get_option('converso_default_greeting', ''),
+                'location_city' => '',
+                'location_state' => '',
+                'location_country' => '',
+                'is_active' => 1,
+                'is_default' => 0
+            ];
         }
 
         return null;
     }
 
+    public static function decode_dynamic_fields($agent) {
+        if (!$agent) return null;
 
+        $repo = new \Converso\Database\Repositories\ConversoDynamicFieldsRepository();
+        $dynamic_fields = $repo->all();
 
-    public static function decode_dynamic_fields(array $agent) {
-        $dynamic_fields = get_option("converso_dynamic_fields_data", []);
-
-        // Get agent greetings
-        $greetings = $agent['greetings'] ?? '';
+        // Get agent greeting (Schema 'greeting')
+        $greeting = $agent['greeting'] ?? '';
 
         // Replace placeholders with corresponding values
-        foreach ($dynamic_fields as $field) {
-            if (isset($field['callable'], $field['value'])) {
-                $greetings = str_replace($field['callable'], $field['value'], $greetings);
+        if (is_array($dynamic_fields)) {
+            foreach ($dynamic_fields as $field) {
+                if (isset($field['callable'], $field['value'])) {
+                    $greeting = str_replace($field['callable'], $field['value'], $greeting);
+                }
             }
         }
 
-        // Return modified agent with decoded greetings
-        $agent['greetings'] = $greetings;
+        // Return modified agent with decoded greeting
+        // Frontend expects 'greetings'
+        $agent['greetings'] = $greeting; 
+        
         return $agent;
     }
 

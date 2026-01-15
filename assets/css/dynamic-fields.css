@@ -1,0 +1,22 @@
+
+.add-field-modal {
+  width: 60%;
+  background: var(--color-grey-10);
+  
+  font-family: var(--font-primary);
+}
+
+.input-field:focus {
+  border-color: var(--color-primary);
+}
+
+/* Animation classes */
+.show-modal {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.show-box {
+  opacity: 1 !important;
+  scale: 1 !important;
+}
