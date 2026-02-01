@@ -5,6 +5,7 @@
 .gitlab-ci.yml
 .travis.yml
 .DS_Store
+README.md
 Thumbs.db
 behat.yml
 bin
