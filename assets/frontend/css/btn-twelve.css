@@ -1,0 +1,24 @@
+.wa-icon {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}            
+
+/* Variant 12: Split Colors */
+.btn-12 {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(90deg, #25d366 50%, #128c7e 50%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+.btn-12:hover {
+    background: linear-gradient(90deg, #128c7e 50%, #25d366 50%);
+    transform: rotate(180deg);
+}
+

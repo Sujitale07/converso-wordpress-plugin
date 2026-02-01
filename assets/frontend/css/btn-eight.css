@@ -1,0 +1,24 @@
+.wa-icon {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}            
+/* Variant 8: 3D Effect */
+.btn-8 {
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 0 #1a9b4f, 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-8:hover {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 #1a9b4f, 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+

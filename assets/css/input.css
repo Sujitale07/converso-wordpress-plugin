@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url('../fonts/ibm-plex-sans/ibm-plex-sans-variable.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: italic;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url('../fonts/ibm-plex-sans/ibm-plex-sans-italic-variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/inter/inter-variable.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/inter/inter-italic-variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'DM Serif Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/dm-serif-text/dm-serif-text-regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'DM Serif Text';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/dm-serif-text/dm-serif-text-italic.ttf') format('truetype');
+}
+
+@import "remixicon.css";
+@import "tailwindcss";
+@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-primary: "IBM Plex Sans", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+  --font-accent: "DM Serif Text", serif;
+
+  --color-primary: #005aff;
+
+  --color-grey-1: #212121;
+  --color-grey-2: #454545;
+  --color-grey-3: #595959;
+  --color-grey-4: #8b8b8b;
+  --color-grey-5: #b2b2b2;
+  --color-grey-6: #e0e0e0;
+  --color-grey-7: #f2f2f2;
+  --color-grey-8: #fafafa;
+  --color-grey-9: #f9fafd;
+  --color-grey-10: #fcfcfc;
+  --color-grey-11: #f9f9f9;
+
+  /* Blue / background */
+  --color-blue-bg: #f3f8ff;
+
+  /* Dark mode */
+  --color-dark-1: #121212;
+  --color-dark-2: #2d2d2d;
+  --color-dark-bg2: #1a1a1a;
+}
+

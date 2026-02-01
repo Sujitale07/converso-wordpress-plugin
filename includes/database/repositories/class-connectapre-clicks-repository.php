@@ -1,0 +1,197 @@
+<?php
+
+namespace Connectapre\Database\Repositories;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
+class ConnectapreClicksRepository
+{
+    private $table_name;
+
+    public function __construct()
+    {
+        global $wpdb;
+        $this->table_name = $wpdb->prefix . 'connectapre_clicks';        
+    }
+
+    public function create($data)
+    {
+        global $wpdb;
+        // Map keys if necessary, or assume $data keys match column names
+        $wpdb->insert($this->table_name, $data);
+        return $wpdb->insert_id;
+    }
+
+    public function get_all()
+    {
+        global $wpdb;
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        return $wpdb->get_results("SELECT * FROM {$this->table_name}");
+    }
+
+    public function get_all_visitors(){
+
+        global $wpdb;
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = "SELECT * FROM {$this->table_name} GROUP BY visitor_id";
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_results($sql);
+    }
+
+    public function get_visitors_by_page(){
+        global $wpdb;
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = "SELECT page_path, COUNT(DISTINCT visitor_id) as visitors FROM {$this->table_name} GROUP BY page_path";
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_results($sql);
+    }
+
+    public function total_clicks(){
+        global $wpdb;
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        return (int) $wpdb->get_var("SELECT COUNT(*) FROM {$this->table_name}");
+    }
+
+    public function total_unique_visitors(){
+        global $wpdb;
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        return (int) $wpdb->get_var("SELECT COUNT(DISTINCT visitor_id) FROM {$this->table_name}");
+    }
+
+    public function get_clicks_by_agent() {
+        global $wpdb;
+        $agents_table = $wpdb->prefix . 'connectapre_agents';
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = "SELECT a.name, COUNT(c.id) as clicks 
+                FROM {$this->table_name} c
+                LEFT JOIN {$agents_table} a ON c.agent_id = a.id
+                GROUP BY c.agent_id
+                ORDER BY clicks DESC";
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_results($sql);
+    }
+
+    public function total_clicks_today(){
+        global $wpdb;
+        $today = current_time('Y-m-d');
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$this->table_name} WHERE stat_date = %s", $today));
+    }
+
+    public function get_most_active_page(){
+        global $wpdb;
+        
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = "SELECT page_path, COUNT(*) as count 
+                FROM {$this->table_name} 
+                GROUP BY page_path 
+                ORDER BY count DESC 
+                LIMIT 1";
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_row($sql);
+    }
+
+    public function get_top_pages($limit = 5) {
+        global $wpdb;
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = $wpdb->prepare(
+            "SELECT page_path, COUNT(*) as count 
+             FROM {$this->table_name} 
+             GROUP BY page_path 
+             ORDER BY count DESC 
+             LIMIT %d",
+            $limit
+        );
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_results($sql);
+    }
+
+    public function get_top_locations($type = 'country', $limit = 5) {
+        global $wpdb;
+        $column = ($type === 'city') ? 'location_city' : 'location_country';
+        
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = $wpdb->prepare(
+            "SELECT {$column} as label, COUNT(*) as count 
+             FROM {$this->table_name} 
+             WHERE {$column} IS NOT NULL AND {$column} != '' 
+             GROUP BY {$column} 
+             ORDER BY count DESC 
+             LIMIT %d",
+            $limit
+        );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_results($sql);
+    }
+
+    public function get_recent_clicks($limit = 5) {
+        global $wpdb;
+        $agents_table = $wpdb->prefix . 'connectapre_agents';
+        
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = $wpdb->prepare(
+            "SELECT c.*, a.name as agent_name 
+             FROM {$this->table_name} c 
+             LEFT JOIN {$agents_table} a ON c.agent_id = a.id 
+             ORDER BY c.created_at DESC 
+             LIMIT %d",
+            $limit
+        );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_results($sql);
+    }
+
+    public function get_filtered_clicks($filters = []) {
+        global $wpdb;
+        $agents_table = $wpdb->prefix . 'connectapre_agents';
+        
+        $where = ["1=1"];
+        $params = [];
+
+        if (!empty($filters['agent_id'])) {
+            $where[] = "c.agent_id = %d";
+            $params[] = $filters['agent_id'];
+        }
+
+        if (!empty($filters['start_date'])) {
+            $where[] = "c.stat_date >= %s";
+            $params[] = $filters['start_date'];
+        }
+
+        if (!empty($filters['end_date'])) {
+            $where[] = "c.stat_date <= %s";
+            $params[] = $filters['end_date'];
+        }
+
+        $where_clause = implode(" AND ", $where);
+        
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $sql = "SELECT c.*, a.name as agent_name 
+                FROM {$this->table_name} c 
+                LEFT JOIN {$agents_table} a ON c.agent_id = a.id 
+                WHERE $where_clause 
+                ORDER BY c.created_at DESC";
+
+        if (!empty($params)) {
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+            $sql = $wpdb->prepare($sql, $params);
+        }
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_results($sql);
+    }
+}
+

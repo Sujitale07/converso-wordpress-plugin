@@ -1,0 +1,23 @@
+.wa-icon {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}            
+
+/* Variant 7: Neon Glow */
+.btn-7 {
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px #25d366, 0 0 40px #25d366;
+}
+.btn-7:hover {
+    box-shadow: 0 0 30px #25d366, 0 0 60px #25d366, 0 0 90px #25d366;
+}
+

@@ -1,0 +1,26 @@
+.wa-icon {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}            
+
+
+/* Variant 18: Skew Effect */
+.connectapre-btn-18 {
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+
+.connectapre-btn-18:hover {
+    transform: skew(-10deg, -5deg) scale(1.1);
+    border-radius: 20px;
+}
+
