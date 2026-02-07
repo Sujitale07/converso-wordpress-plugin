@@ -36,9 +36,8 @@ class DynamicFields {
         wp_enqueue_style(
             'connectapre-dynamic-fields-css',
             CONNECTAPRE_PLUGIN_URL . "/assets/css/dynamic-fields.css",
-            ['jquery'],
-            '1.0',
-            true
+            [],
+            '1.0'
         );
 
         // Uses same CSS as agents or global Tailwind
