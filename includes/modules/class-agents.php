@@ -87,7 +87,7 @@ class Agents {
         }
 
         // Greetings (optional)
-        $greetings = sanitize_text_field($_POST['greeting'] ?? '');
+        $greetings = sanitize_textarea_field($_POST['greeting'] ?? '');
 
         // Location (required)
         $location = isset($_POST['location']) ? sanitize_text_field($_POST['location']) : '';

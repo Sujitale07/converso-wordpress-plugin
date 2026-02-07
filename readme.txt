@@ -66,12 +66,12 @@ Yes. All settings are stored via the WordPress options API (`get_option`). Devel
 
 This plugin connects to several third-party APIs to provide location-based agent routing and location search features.
 
-1. **Photon API (by Komoot)**
+1. **Photon API (photon.komoot.io)**
    - **Usage**: Handles search queries in the admin settings to help you find and select locations for your agents.
    - **Data Sent**: Search query strings (e.g., "New York").
    - **Links**: [Terms of Use](https://www.komoot.com/terms-of-service), [Privacy Policy](https://www.komoot.com/privacy)
 
-2. **Nominatim API (OpenStreetMap)**
+2. **Nominatim API (nominatim.openstreetmap.org)**
    - **Usage**: Converts visitor GPS coordinates (latitude/longitude) into address details (reverse geocoding) to route them to the nearest agent.
    - **Data Sent**: Visitor's latitude and longitude.
    - **Links**: [Usage Policy](https://operations.osmfoundation.org/policies/nominatim/), [Privacy Policy](https://wiki.openstreetmap.org/wiki/Privacy_Policy)

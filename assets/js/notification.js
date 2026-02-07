@@ -48,6 +48,15 @@ const ConnectapreNotification = (function() {
         }, 5000);
     }
 
+    // Check for inline messages passed from PHP
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof ConnectapreMessages !== 'undefined' && Array.isArray(ConnectapreMessages)) {
+            ConnectapreMessages.forEach(msg => {
+                show(msg.type, msg.message, msg.title);
+            });
+        }
+    });
+
     return {
         show: show
     };

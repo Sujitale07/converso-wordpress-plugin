@@ -34,7 +34,26 @@ class BtnOne {
             </svg>
         </div>                
         <?php
-        return ob_get_clean();
+        $html = ob_get_clean();
+
+        $allowed_html = wp_kses_allowed_html( 'post' );
+        $allowed_html['svg']  = array(
+            'xmlns'       => true,
+            'viewbox'     => true,
+            'width'       => true,
+            'height'      => true,
+            'fill'        => true,
+            'class'       => true,
+            'role'        => true,
+            'aria-hidden' => true,
+            'focusable'   => true,
+        );
+        $allowed_html['path'] = array(
+            'd'    => true,
+            'fill' => true,
+        );
+
+        return wp_kses( $html, $allowed_html );
     }
 }
 

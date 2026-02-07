@@ -18,11 +18,17 @@ class Helper {
             'postcode'=> ''
         ];
 
+        // Sanitize and Validate Coordinates
         $lat = sanitize_text_field($lat);
         $lon = sanitize_text_field($lon);
 
-        if (!$lat || !$lon) {
-            return $location;
+        if ( ! is_numeric( $lat ) || ! is_numeric( $lon ) ) {
+             return $location;
+        }
+
+        // Additional validation for coordinate ranges
+        if ( $lat < -90 || $lat > 90 || $lon < -180 || $lon > 180 ) {
+             return $location;
         }
 
         $url = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json&accept-language=en";
@@ -48,11 +54,11 @@ class Helper {
 
         $addr = $data['address'];
         return [
-            'city'    => $addr['city'] ?? $addr['town'] ?? $addr['village'] ?? 'Unknown',
-            'state'   => $addr['state'] ?? '',
-            'country' => $addr['country'] ?? 'Unknown',
-            'road'    => $addr['road'] ?? '',
-            'postcode'=> $addr['postcode'] ?? ''
+            'city'    => isset($addr['city']) ? sanitize_text_field($addr['city']) : (isset($addr['town']) ? sanitize_text_field($addr['town']) : (isset($addr['village']) ? sanitize_text_field($addr['village']) : 'Unknown')),
+            'state'   => isset($addr['state']) ? sanitize_text_field($addr['state']) : '',
+            'country' => isset($addr['country']) ? sanitize_text_field($addr['country']) : 'Unknown',
+            'road'    => isset($addr['road']) ? sanitize_text_field($addr['road']) : '',
+            'postcode'=> isset($addr['postcode']) ? sanitize_text_field($addr['postcode']) : ''
         ];
     }
 
@@ -64,12 +70,20 @@ class Helper {
         ];
 
         $ip = '';
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+        if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+            $ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
+        } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+            // Use only the first IP if multiple are present
+            $forwarded = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+            $parts     = explode( ',', $forwarded );
+            $ip        = trim( $parts[0] );
         } else {
-            $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+            $ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+        }
+
+        // Validate IP
+        if ( ! filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+            return $location;
         }
 
         if (empty($ip) || $ip === '127.0.0.1' || $ip === '::1') {
@@ -85,14 +99,14 @@ class Helper {
         }
 
         $data = json_decode(wp_remote_retrieve_body($res), true);
-        if (!$data || $data['status'] !== 'success') {
+        if (!$data || ( isset($data['status']) && $data['status'] !== 'success' ) ) {
             return $location;
         }
 
         return [
-            'city'    => $data['city'] ?? 'Unknown',
-            'state'   => $data['regionName'] ?? '',
-            'country' => $data['country'] ?? 'Unknown'
+            'city'    => isset($data['city']) ? sanitize_text_field($data['city']) : 'Unknown',
+            'state'   => isset($data['regionName']) ? sanitize_text_field($data['regionName']) : '',
+            'country' => isset($data['country']) ? sanitize_text_field($data['country']) : 'Unknown'
         ];
     }
 

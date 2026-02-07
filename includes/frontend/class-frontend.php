@@ -98,8 +98,8 @@ class Frontend{
         check_ajax_referer('connectapre_nonce', 'nonce');
         
         try {
-            $lat = isset($_POST['lat']) ? sanitize_text_field($_POST['lat']) : '';
-            $lon = isset($_POST['lon']) ? sanitize_text_field($_POST['lon']) : '';
+            $lat = isset($_POST['lat']) ? sanitize_text_field(wp_unslash($_POST['lat'])) : '';
+            $lon = isset($_POST['lon']) ? sanitize_text_field(wp_unslash($_POST['lon'])) : '';
             
             if (!$lat || !$lon) {
                 // Try IP detection if GPS is missing
@@ -177,8 +177,8 @@ class Frontend{
         check_ajax_referer('connectapre_nonce', 'nonce');
 
         $agent_id = isset($_POST['agent_id']) ? intval($_POST['agent_id']) : 0;
-        $visitor_id = isset($_POST['visitor_id']) ? sanitize_text_field($_POST['visitor_id']) : '';
-        $page_path = isset($_POST['page_path']) ? sanitize_text_field($_POST['page_path']) : '';
+        $visitor_id = isset($_POST['visitor_id']) ? sanitize_text_field(wp_unslash($_POST['visitor_id'])) : '';
+        $page_path = isset($_POST['page_path']) ? sanitize_text_field(wp_unslash($_POST['page_path'])) : '';
         
         if (!$visitor_id) {
             wp_send_json_error('Missing visitor ID');
@@ -188,9 +188,9 @@ class Frontend{
             'agent_id' => $agent_id,
             'visitor_id' => $visitor_id,
             'page_path' => $page_path,
-            'location_country' => isset($_POST['location_country']) ? sanitize_text_field($_POST['location_country']) : '',
-            'location_state' => isset($_POST['location_state']) ? sanitize_text_field($_POST['location_state']) : '',
-            'location_city' => isset($_POST['location_city']) ? sanitize_text_field($_POST['location_city']) : '',
+            'location_country' => isset($_POST['location_country']) ? sanitize_text_field(wp_unslash($_POST['location_country'])) : '',
+            'location_state' => isset($_POST['location_state']) ? sanitize_text_field(wp_unslash($_POST['location_state'])) : '',
+            'location_city' => isset($_POST['location_city']) ? sanitize_text_field(wp_unslash($_POST['location_city'])) : '',
             'stat_date' => current_time('Y-m-d'),
             'created_at' => current_time('mysql'),
             'source' => 'widget'

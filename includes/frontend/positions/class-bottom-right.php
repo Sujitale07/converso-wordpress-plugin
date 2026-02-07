@@ -16,16 +16,40 @@ class BottomRight{
         wp_enqueue_style("connectapre-bottom-right-css",CONNECTAPRE_PLUGIN_URL . "assets/frontend/css/bottom-right.css", [], 1, false);
     }
 
-    public function render($children, $link = "#", $tab = false){
-        ob_start();
-        ?>
-        <div id="connectapre-wp-button" class="connectapre-bottom-right">
-            <a href="<?php echo esc_url( $link ); ?>" <?php echo $tab ? "target='_blank'" : ''; ?>>
-                <?php echo $children; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            </a>
-        </div>
-        <?php
-        return ob_get_clean();
-    }    
-}
+    public function render( $children, $link = "#", $tab = false ) {
+		$allowed_html = wp_kses_allowed_html( 'post' );
+		$allowed_html['svg']  = array(
+			'xmlns'       => true,
+			'viewbox'     => true,
+			'width'       => true,
+			'height'      => true,
+			'fill'        => true,
+			'class'       => true,
+			'role'        => true,
+			'aria-hidden' => true,
+			'focusable'   => true,
+		);
+		$allowed_html['path'] = array(
+			'd'    => true,
+			'fill' => true,
+		);
+		$allowed_html['g']    = array(
+			'fill' => true,
+		);
+		$allowed_html['defs'] = array();
+		$allowed_html['div']  = array(
+			'class' => true,
+			'id'    => true,
+		);
 
+		ob_start();
+		?>
+		<div id="connectapre-wp-button" class="connectapre-bottom-right">
+			<a href="<?php echo esc_url( $link ); ?>" <?php echo $tab ? "target='_blank'" : ''; ?>>
+				<?php echo wp_kses( $children, $allowed_html ); ?>
+			</a>
+		</div>
+		<?php
+		return ob_get_clean();
+	}    
+}

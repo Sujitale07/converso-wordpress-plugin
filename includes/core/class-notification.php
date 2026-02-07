@@ -35,6 +35,19 @@ class Notification {
             '1.0.0',
             true
         );
+
+        $user_id = get_current_user_id();
+        $key = self::TRANSIENT_KEY . '_' . $user_id;
+        $notifications = get_transient($key);
+
+        if (!empty($notifications)) {
+            wp_add_inline_script(
+                'connectapre-notification-js',
+                'const ConnectapreMessages = ' . wp_json_encode($notifications) . ';',
+                'before'
+            );
+            delete_transient($key);
+        }
     }
 
     public static function success($message, $title = 'Success') {
@@ -76,30 +89,8 @@ class Notification {
         if ( ! $screen || 'toplevel_page_connectapre' !== $screen->id ) {
             return;
         }
-
-        $user_id = get_current_user_id();
-        $key = self::TRANSIENT_KEY . '_' . $user_id;
-
-        $notifications = get_transient($key);
-        
-        if (empty($notifications)) {
-            return;
-        }
-
-        delete_transient($key);
-
         ?>
         <div id="connectapre-toast-container" class="connectapre-toast-container"></div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                if (typeof ConnectapreNotification !== 'undefined') {
-                    const messages = <?php echo wp_json_encode($notifications); ?>;
-                    messages.forEach(msg => {
-                        ConnectapreNotification.show(msg.type, msg.message, msg.title);
-                    });
-                }
-            });
-        </script>
         <?php
     }
 }
