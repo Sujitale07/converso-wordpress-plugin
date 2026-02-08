@@ -445,7 +445,7 @@ class Agents {
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2"><?php esc_html_e('Full Name', 'connectapre'); ?><span
                                 class="text-red-500">*</span></label>
-                        <input type="text" name="name" placeholder="Eg. Sujit Ale Magar"
+                        <input type="text" name="name" placeholder="Eg. John Doe"
                             class="w-full !px-4 !py-2.5 !border !border-gray-300 !rounded-lg !focus:ring-2 !focus:ring-blue-500 !focus:border-transparent !transition-all !outline-none"
                             required />
                     </div>
@@ -453,7 +453,7 @@ class Agents {
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number<span
                                 class="text-red-500">*</span></label>
-                        <input type="text" name="phone" placeholder="Eg. +977 9813213123"
+                        <input type="text" name="phone" placeholder="Eg. +1 123 456 7890"
                             class="w-full !px-4 !py-2.5 !border !border-gray-300 !rounded-lg !focus:ring-2 !focus:ring-blue-500 !focus:border-transparent !transition-all !outline-none"
                             required />
                     </div>
@@ -464,7 +464,7 @@ class Agents {
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Location<span
                                 class="text-red-500">*</span></label>
-                        <input type="text" name="location" placeholder="Eg. Kathmandu, Nepal"
+                        <input type="text" name="location" placeholder="Eg. New York, USA"
                             class="location-select w-full !px-4 !py-2.5 !border !border-gray-300 !rounded-lg !focus:ring-2 !focus:ring-blue-500 !focus:border-transparent !transition-all !outline-none"
                             required />
                     </div>
@@ -587,7 +587,7 @@ class Agents {
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Full Name<span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="edit--name" name="edit--name" placeholder="Eg. Sujit Ale Magar"
+                        <input type="text" id="edit--name" name="edit--name" placeholder="Eg. John Doe"
                             class="w-full !px-4 !py-2.5 !border !border-gray-300 !rounded-lg !focus:ring-2 !focus:ring-blue-500 !focus:border-transparent !transition-all !outline-none"
                             required />
                     </div>
@@ -595,7 +595,7 @@ class Agents {
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number<span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="edit--phone" name="edit--phone" placeholder="Eg. +977 9813213123"
+                        <input type="text" id="edit--phone" name="edit--phone" placeholder="Eg. +1 123 456 7890"
                             class="w-full !px-4 !py-2.5 !border !border-gray-300 !rounded-lg !focus:ring-2 !focus:ring-blue-500 !focus:border-transparent !transition-all !outline-none"
                             required />
                     </div>
@@ -605,7 +605,7 @@ class Agents {
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Location<span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="edit--location" name="edit--location" placeholder="Eg. Kathmandu, Nepal"
+                        <input type="text" id="edit--location" name="edit--location" placeholder="Eg. New York, USA"
                             class="location-select w-full !px-4 !py-2.5 !border !border-gray-300 !rounded-lg !focus:ring-2 !focus:ring-blue-500 !focus:border-transparent !transition-all !outline-none"
                             required />
                     </div>

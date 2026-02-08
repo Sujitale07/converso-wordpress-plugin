@@ -82,7 +82,7 @@ class Seeder {
             'connectapre_business_name' => 'ABCD Inc.',
             'connectapre_business_type' => 'Ecommerce',
             'connectapre_cta_text' => 'Chat with us',
-            'connectapre_primary_number'=>"9847385841",
+            'connectapre_primary_number'=>"+1 123 456 7890",
             'connectapre_fallback_primary_number'=>true,
             "connectapre_default_greeting"=>"Hello! How can I help you?",
             "connectapre_offline_behavior"=>true,

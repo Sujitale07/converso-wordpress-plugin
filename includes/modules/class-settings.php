@@ -69,7 +69,7 @@ class Settings {
                             <h3 class="!text-base !mt-0 !mb-4  !font-secondary"><?php esc_html_e('Site Connection', 'connectapre'); ?></h3>
                             <div>
                                 <label for="primary-number" class="!text-sm !my-0 text-gray-500 !font-secondary"><?php esc_html_e('Primary WhatsApp Number', 'connectapre'); ?></label>
-                                <input type="text" name="connectapre_primary_number" value="<?php echo esc_attr($primary_number); ?>" placeholder="555 234 9876" class="w-full rounded-lg !mt-3  !font-secondary !text-xs !pl-4 !py-3 !border !border-gray-200" id="primary-number">
+                                <input type="text" name="connectapre_primary_number" value="<?php echo esc_attr($primary_number); ?>" placeholder="+1 123 456 7890" class="w-full rounded-lg !mt-3  !font-secondary !text-xs !pl-4 !py-3 !border !border-gray-200" id="primary-number">
                                 <p class="!font-secondary !text-xs !text-gray-500 !mt-2"><?php esc_html_e('Default number used when no agent is available or routing is disabled', 'connectapre'); ?></p>
                             </div>
                             <div class="!mt-8">
